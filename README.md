@@ -9,6 +9,7 @@
 - 🌀 [Prettier](https://prettier.io) - Opinionated Code Formatter
 - ⚙️ WIP [Jest](https://jestjs.io/) - Testing libraries
 - ⌨️ Absolute Imports
+- WIP Organize imports
 
 ## Usage
 
