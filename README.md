@@ -1,27 +1,27 @@
-# React + TypeScript + Vite
+# react-template
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Features
 
-Currently, two official plugins are available:
+- ⚡️ [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
+- ⚛️ [React 18](https://reactjs.org/) - A JavaScript library for building user interfaces
+- 💎 [TypeScript](https://www.typescriptlang.org/) - Why not?!
+- 🔨 [EsLint](https://eslint.org/) - Pluggable JavaScript linter
+- 🌀 [Prettier](https://prettier.io) - Opinionated Code Formatter
+- ⚙️ WIP [Jest](https://jestjs.io/) - Testing libraries
+- ⌨️ Absolute Imports
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Usage
 
-## Expanding the ESLint configuration
+```bash
+# to clone repository run:
+npx degit Frontend-Next/react-template my-app
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+cd my-app
 
-- Configure the top-level `parserOptions` property like this:
+# Required if you want a repository and work with Git hooks
+git init
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+yarn install
+
+yarn dev
 ```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
