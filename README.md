@@ -9,9 +9,10 @@
 - 🌀 [Prettier](https://prettier.io) - Opinionated Code Formatter
 - ⚙️ WIP [Jest](https://jestjs.io/) - Testing libraries
 - ⌨️ Absolute Imports
-- WIP Organize imports
 
 ## Usage
+
+To use this template see instructions below:
 
 ```bash
 # to clone repository run:
@@ -26,3 +27,13 @@ yarn install
 
 yarn dev
 ```
+
+## Available commands
+
+| Command      | Description                                                                 |
+| ------------ | --------------------------------------------------------------------------- |
+| yarn dev     | Runs the app in the development mode.                                       |
+| yarn build   | Builds the app for production to the `dist` folder.                         |
+| yarn lint    | Runs the Eslint and show code problems.                                     |
+| yarn format  | Runs the Prettier and fix code style.                                       |
+| yarn preview | Builds the app for production to the `dist` folder, and run locally server. |
