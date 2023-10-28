@@ -1,4 +1,4 @@
-# react-template
+# @Frontend-Next/react-template
 
 ## Features
 
