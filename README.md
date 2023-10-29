@@ -4,7 +4,7 @@
 
 - ⚡️ [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
 - ⚛️ [React 18](https://reactjs.org/) - A JavaScript library for building user interfaces
-- 💎 [TypeScript](https://www.typescriptlang.org/) - Why not?!
+- 💎 [TypeScript](https://www.typescriptlang.org/) - It's a standard now!
 - 🔨 [EsLint](https://eslint.org/) - Pluggable JavaScript linter
 - 🌀 [Prettier](https://prettier.io) - Opinionated Code Formatter
 - ⚙️ WIP [Jest](https://jestjs.io/) - Testing libraries
