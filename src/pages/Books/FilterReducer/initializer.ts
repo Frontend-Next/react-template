@@ -1,7 +1,9 @@
 import { Book, uniqueFilterRowFromBookArrayByKey } from "models/book";
-import { BooksFilter } from "./types";
+import { BooksFilterState } from "./types";
 
-export const booksReducerInitializerFunction = (books: Book[]): BooksFilter => {
+export const booksReducerInitializerFunction = (
+  books: Book[],
+): BooksFilterState => {
   console.log("booksReducerInitializerFunction", books);
 
   const authors = uniqueFilterRowFromBookArrayByKey(
@@ -9,22 +11,29 @@ export const booksReducerInitializerFunction = (books: Book[]): BooksFilter => {
     "author_id",
     "author",
   );
-  console.log("booksReducerInitializerFunction authors", authors);
 
   const categories: FilterRow[] = uniqueFilterRowFromBookArrayByKey(
     books,
     "category_id",
     "category",
   );
-  console.log("booksReducerInitializerFunction categories", categories);
 
   return {
-    bookFilterData: books,
-    selectedBookFilterData: books,
-    allAuthors: authors,
-    selectedAuthors: [...authors.map((element) => element.id)],
-    allCategories: categories,
-    selectedCategories: [...categories.map((element) => element.id)],
-    title: "",
+    tableData: {
+      page: 0,
+      pageSize: 50, // TODO: set to some default const
+    },
+    dropdownFilters: {
+      bookDataForFilters: books,
+      selectedBookFilterData: books,
+      allAuthors: authors,
+      selectedAuthors: [...authors.map((element) => element.id)],
+      allCategories: categories,
+      selectedCategories: [...categories.map((element) => element.id)],
+    },
+    dataFilters: {
+      title: "",
+    },
+    applyTimestamp: Date.now(),
   };
 };

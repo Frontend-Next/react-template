@@ -1,17 +1,19 @@
-import { useBookFiltersData } from "api/book";
+import { useBookDataForFilters } from "api/book/hook";
 import { Book } from "models/book";
 import { useReducer } from "react";
-import { booksReducerInitializerFunction } from "./initializer";
 import { booksFilterReducer } from "./reducer";
-import { BooksFilterReducer } from "./types";
+import { BooksFilterActionType, BooksFilterReducer } from "./types";
 
 export const useBooksFilterReducer = () => {
-  const { data } = useBookFiltersData();
+  const {} = useBookDataForFilters((books: Book[]) => {
+    console.log("useBookDataForFilters selector", books);
+    dispatch({ type: BooksFilterActionType.SetFiltersData, payload: books });
+    return books;
+  });
 
-  const [state, dispatch] = useReducer<BooksFilterReducer, Book[]>(
+  const [state, dispatch] = useReducer<BooksFilterReducer>(
     booksFilterReducer,
-    data,
-    booksReducerInitializerFunction,
+    {},
   );
 
   return { state, dispatch };

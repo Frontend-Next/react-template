@@ -1,10 +1,9 @@
-import { useBookFiltersData } from "api/book";
 import { FC } from "react";
 import { BooksFilterWrapper } from "./BooksFilterWrapper";
+import { BooksTable } from "./BooksTable";
+import { BooksListContextProvider } from "./Context";
 
 export const BooksList: FC = () => {
-  const { data } = useBookFiltersData();
-
   return (
     <>
       <header>
@@ -12,11 +11,11 @@ export const BooksList: FC = () => {
       </header>
 
       <main>
-        <BooksFilterWrapper />
+        <BooksListContextProvider>
+          <BooksFilterWrapper />
 
-        <ul>
-          {data?.map((element) => <li key={element.id}>{element.title}</li>)}
-        </ul>
+          <BooksTable />
+        </BooksListContextProvider>
       </main>
     </>
   );
