@@ -1,3 +1,5 @@
+import { PublicationGroup } from "constants/PublicationGroup";
+
 export const BookKeyFactory = {
   all: { domain: "book" } as const,
   list: () => ({ ...BookKeyFactory.all, type: "list" }) as const,
@@ -9,6 +11,7 @@ export const BookKeyFactory = {
     pageSize: number,
     authors: number[],
     categories: number[],
+    publicationGroup: PublicationGroup,
   ) =>
     [
       {
@@ -18,6 +21,7 @@ export const BookKeyFactory = {
         pageSize,
         authors,
         categories,
+        publicationGroup,
       },
     ] as const,
   bookById: (id: number) =>

@@ -1,3 +1,4 @@
+import { PublicationGroup } from "constants/PublicationGroup";
 import { Book } from "models/book";
 
 export type BooksFilterReducer = (
@@ -18,6 +19,9 @@ export interface BooksFilterState {
     allCategories: FilterRow[];
     selectedCategories: number[];
   };
+  switchFilters?: {
+    publicationGroup: PublicationGroup;
+  };
   dataFilters?: {
     title: string;
   };
@@ -26,8 +30,10 @@ export interface BooksFilterState {
 
 export enum BooksFilterActionType {
   SetFiltersData,
+  PageChange,
   AuthorChange,
   CategoryChange,
+  PublicationGroupChange,
   SelectAll,
   Clear,
   Apply,
@@ -38,6 +44,11 @@ type SetFiltersDataAction = {
   payload: Book[];
 };
 
+type PageChangeAction = {
+  type: BooksFilterActionType.PageChange;
+  payload: {page: number, pageSize: number};
+};
+
 type AuthorChangeAction = {
   type: BooksFilterActionType.AuthorChange;
   payload: number[];
@@ -46,6 +57,11 @@ type AuthorChangeAction = {
 type CategoryChangeAction = {
   type: BooksFilterActionType.CategoryChange;
   payload: number[];
+};
+
+type PublicationGroupChangeAction = {
+  type: BooksFilterActionType.PublicationGroupChange;
+  payload: PublicationGroup;
 };
 
 type SelectAllAction = {
@@ -62,8 +78,10 @@ type ApplyAction = {
 
 export type BooksFilterActions =
   | SetFiltersDataAction
+  | PageChangeAction
   | AuthorChangeAction
   | CategoryChangeAction
+  | PublicationGroupChangeAction
   | SelectAllAction
   | ClearAction
   | ApplyAction;

@@ -22,6 +22,9 @@ export const booksFilterReducer: BooksFilterReducer = (
         state.dropdownFilters?.bookDataForFilters,
       );
 
+    case BooksFilterActionType.PageChange:
+      return { ...state, tableData: { ...state.tableData, ...action.payload } };
+
     case BooksFilterActionType.AuthorChange:
       if (!state.dropdownFilters) return { ...state };
 
@@ -70,6 +73,18 @@ export const booksFilterReducer: BooksFilterReducer = (
           selectedAuthors: [...authors.map((element) => element.id)],
           selectedCategories: action.payload,
         },
+      };
+
+    case BooksFilterActionType.PublicationGroupChange:
+      if (!state.switchFilters) return { ...state };
+
+      return {
+        ...state,
+        switchFilters: {
+          ...state.switchFilters,
+          publicationGroup: action.payload,
+        },
+        applyTimestamp: Date.now(),
       };
 
     case BooksFilterActionType.Apply:

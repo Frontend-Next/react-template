@@ -1,6 +1,6 @@
 import { MultiSelect } from "primereact/multiselect";
-import { Skeleton } from "primereact/skeleton";
 import { FC } from "react";
+import { FilterMultiSelectSkeleton } from "./skeleton";
 
 interface FilterMultiSelectProps {
   placeholder: string;
@@ -16,7 +16,7 @@ export const FilterMultiSelect: FC<FilterMultiSelectProps> = ({
   onChangeHandler,
 }) => {
   return !value || !options ? (
-    <Skeleton className="w-full md:w-20rem mr-2" />
+    <FilterMultiSelectSkeleton />
   ) : (
     <MultiSelect
       value={value}
@@ -26,7 +26,7 @@ export const FilterMultiSelect: FC<FilterMultiSelectProps> = ({
       optionLabel="value"
       placeholder={placeholder}
       maxSelectedLabels={3}
-      className="w-full md:w-20rem mr-2"
+      className="w-full md:w-20rem"
     />
   );
 };

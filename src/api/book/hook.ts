@@ -1,4 +1,5 @@
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { PublicationGroup } from "constants/PublicationGroup";
 import { Book } from "models/book";
 import { BookQuery } from "./query";
 
@@ -20,6 +21,7 @@ export const useBookTableData = (
   pageSize: number,
   authors: number[],
   categories: number[],
+  publicationGroup: PublicationGroup,
 ) => {
   return useQuery(
     BookQuery.bookTableDataQuery(
@@ -28,6 +30,7 @@ export const useBookTableData = (
       pageSize,
       authors,
       categories,
+      publicationGroup,
     ),
   );
 };
@@ -38,6 +41,7 @@ export const useSuspenseBookTableData = (
   pageSize: number,
   authors: number[],
   categories: number[],
+  publicationGroup: PublicationGroup,
 ) => {
   return useSuspenseQuery(
     BookQuery.bookTableDataQuery(
@@ -46,6 +50,7 @@ export const useSuspenseBookTableData = (
       pageSize,
       authors,
       categories,
+      publicationGroup,
     ),
   );
 };

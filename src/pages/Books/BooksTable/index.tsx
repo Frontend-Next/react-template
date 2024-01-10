@@ -1,47 +1,30 @@
-import { useBookTableData } from "api/book/hook";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
-import { FC, useMemo } from "react";
-import { useBooksListContext } from "../Context/hook";
+import { FC } from "react";
+import { BooksFilterActionType } from "../FilterReducer/types";
+import { useBooksTableView } from "./hook";
 
 export const BooksTable: FC = () => {
-  const { filterState } = useBooksListContext();
-
-  const { isEnabled, page, pageSize, authors, categories } = useMemo(() => {
-    if (
-      filterState.applyTimestamp &&
-      filterState.tableData &&
-      filterState.dropdownFilters
-    ) {
-      console.log("filterState.applyTimestamp", filterState.applyTimestamp);
-      return {
-        isEnabled: true,
-        page: filterState.tableData.page,
-        pageSize: filterState.tableData.pageSize,
-        authors: filterState.dropdownFilters.selectedAuthors,
-        categories: filterState.dropdownFilters.selectedCategories,
-      };
-    }
-
-    return {
-      isEnabled: false,
-      page: 0,
-      pageSize: 50,
-      authors: [],
-      categories: [],
-    };
-  }, [filterState.applyTimestamp]);
-
-  const { data } = useBookTableData(
-    isEnabled,
-    page,
-    pageSize,
-    authors,
-    categories,
-  );
+  const { data, page, pageSize, dispatch } = useBooksTableView();
 
   return (
-    <DataTable itemID="id" value={data} stripedRows>
+    <DataTable
+      itemID="id"
+      value={data}
+      totalRecords={50}
+      paginator
+      first={page}
+      rows={pageSize}
+      rowsPerPageOptions={[5, 10, 25, 50]}
+      stripedRows
+      lazy
+      onPage={(event) =>
+        dispatch({
+          type: BooksFilterActionType.PageChange,
+          payload: { page: event.first, pageSize: event.rows },
+        })
+      }
+    >
       <Column field="title" header="Title" />
       <Column field="author" header="Author" />
       <Column field="category" header="Category" />

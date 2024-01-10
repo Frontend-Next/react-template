@@ -12,15 +12,27 @@ export const FilterWrapper: FC<PropsWithChildren<FilterWrapperProps>> = ({
   applyHandler,
   selectAllHandler,
 }) => {
+  const filterElements = (
+    <div className="flex flex-column gap-2">{children}</div>
+  );
+
   return (
-    <Toolbar
-      start={children}
-      end={
-        <FilterWrapperButtons
-          applyHandler={applyHandler}
-          selectAllHandler={selectAllHandler}
-        />
-      }
-    />
+    <>
+      <Toolbar
+        className="align-items-start"
+        pt={{
+          start: {
+            className: "w-10",
+          },
+        }}
+        start={filterElements}
+        end={
+          <FilterWrapperButtons
+            applyHandler={applyHandler}
+            selectAllHandler={selectAllHandler}
+          />
+        }
+      />
+    </>
   );
 };

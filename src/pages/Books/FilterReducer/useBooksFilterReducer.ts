@@ -6,7 +6,6 @@ import { BooksFilterActionType, BooksFilterReducer } from "./types";
 
 export const useBooksFilterReducer = () => {
   const {} = useBookDataForFilters((books: Book[]) => {
-    console.log("useBookDataForFilters selector", books);
     dispatch({ type: BooksFilterActionType.SetFiltersData, payload: books });
     return books;
   });

@@ -1,11 +1,10 @@
+import { PublicationGroup } from "constants/PublicationGroup";
 import { Book, uniqueFilterRowFromBookArrayByKey } from "models/book";
 import { BooksFilterState } from "./types";
 
 export const booksReducerInitializerFunction = (
   books: Book[],
 ): BooksFilterState => {
-  console.log("booksReducerInitializerFunction", books);
-
   const authors = uniqueFilterRowFromBookArrayByKey(
     books,
     "author_id",
@@ -21,7 +20,7 @@ export const booksReducerInitializerFunction = (
   return {
     tableData: {
       page: 0,
-      pageSize: 50, // TODO: set to some default const
+      pageSize: 10, // TODO: set to some default const
     },
     dropdownFilters: {
       bookDataForFilters: books,
@@ -33,6 +32,9 @@ export const booksReducerInitializerFunction = (
     },
     dataFilters: {
       title: "",
+    },
+    switchFilters: {
+      publicationGroup: PublicationGroup.ALL,
     },
     applyTimestamp: Date.now(),
   };
