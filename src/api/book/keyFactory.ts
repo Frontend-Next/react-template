@@ -1,4 +1,4 @@
-import { PublicationGroup } from "constants/PublicationGroup";
+import { BooksExtendedFilterState, BooksFilterState } from ".";
 
 export const BookKeyFactory = {
   all: { domain: "book" } as const,
@@ -6,22 +6,20 @@ export const BookKeyFactory = {
   element: () => ({ ...BookKeyFactory.all, type: "element" }) as const,
   dataForFilters: () =>
     [{ ...BookKeyFactory.list, name: "data-for-filters" }] as const,
-  tableData: (
-    page: number,
-    pageSize: number,
-    authors: number[],
-    categories: number[],
-    publicationGroup: PublicationGroup,
-  ) =>
+  tableData: (filter: BooksFilterState) =>
     [
       {
         ...BookKeyFactory.list,
         name: "table-data",
-        page,
-        pageSize,
-        authors,
-        categories,
-        publicationGroup,
+        ...filter,
+      },
+    ] as const,
+  count: (extendedFilter: BooksExtendedFilterState) =>
+    [
+      {
+        ...BookKeyFactory.list,
+        name: "count",
+        ...extendedFilter,
       },
     ] as const,
   bookById: (id: number) =>

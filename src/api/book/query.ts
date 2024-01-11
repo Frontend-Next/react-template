@@ -1,6 +1,5 @@
 import { UseQueryOptions } from "@tanstack/react-query";
-import { PublicationGroup } from "constants/PublicationGroup";
-import { Book } from "models/book";
+import { Book, BooksExtendedFilterState, BooksFilterState } from ".";
 import { BookClient } from "./client";
 import { BookKeyFactory } from "./keyFactory";
 
@@ -16,20 +15,19 @@ const bookDataForFiltersQuery = (
 
 const bookTableDataQuery = (
   isEnabled: boolean,
-  page: number,
-  pageSize: number,
-  authors: number[],
-  categories: number[],
-  publicationGroup: PublicationGroup,
+  filter: BooksFilterState,
 ): UseQueryOptions<Book[]> => ({
-  queryKey: BookKeyFactory.tableData(
-    page,
-    pageSize,
-    authors,
-    categories,
-    publicationGroup,
-  ),
+  queryKey: BookKeyFactory.tableData(filter),
   queryFn: BookClient.fetchTableData,
+  enabled: isEnabled,
+});
+
+const bookCountQuery = (
+  isEnabled: boolean,
+  extendedFilter: BooksExtendedFilterState,
+): UseQueryOptions<number> => ({
+  queryKey: BookKeyFactory.count(extendedFilter),
+  queryFn: BookClient.fetchCount,
   enabled: isEnabled,
 });
 
@@ -41,5 +39,6 @@ const bookByIdQuery = (id: number): UseQueryOptions<Book> => ({
 export const BookQuery = {
   bookDataForFiltersQuery,
   bookTableDataQuery,
+  bookCountQuery,
   bookByIdQuery,
 };

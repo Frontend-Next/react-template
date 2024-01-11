@@ -1,9 +1,12 @@
 import { Dispatch, FC, PropsWithChildren, createContext, useMemo } from "react";
-import { BooksFilterActions, BooksFilterState } from "../FilterReducer/types";
+import {
+  BooksFilterActions,
+  BooksFilterReducerState,
+} from "../FilterReducer/types";
 import { useBooksFilterReducer } from "../FilterReducer/useBooksFilterReducer";
 
 export interface BooksListContextType {
-  filterState: BooksFilterState;
+  filterState: BooksFilterReducerState;
   dispatch: Dispatch<BooksFilterActions>;
 }
 

@@ -1,40 +1,46 @@
+import { Book } from "api/book";
 import { PublicationGroup } from "constants/PublicationGroup";
-import { Book, uniqueFilterRowFromBookArrayByKey } from "models/book";
-import { BooksFilterState } from "./types";
+import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from "constants/TableDefaults";
+import { BookUtils } from "utils/BookUtils";
+import { BooksFilterReducerState } from "./types";
 
 export const booksReducerInitializerFunction = (
   books: Book[],
-): BooksFilterState => {
-  const authors = uniqueFilterRowFromBookArrayByKey(
+): BooksFilterReducerState => {
+  const authors = BookUtils.uniqueFilterRowFromBookArrayByKey(
     books,
     "author_id",
     "author",
   );
 
-  const categories: FilterRow[] = uniqueFilterRowFromBookArrayByKey(
+  const categories: FilterRow[] = BookUtils.uniqueFilterRowFromBookArrayByKey(
     books,
     "category_id",
     "category",
   );
 
   return {
-    tableData: {
-      page: 0,
-      pageSize: 10, // TODO: set to some default const
-    },
-    dropdownFilters: {
+    filterData: {
       bookDataForFilters: books,
       selectedBookFilterData: books,
       allAuthors: authors,
-      selectedAuthors: [...authors.map((element) => element.id)],
       allCategories: categories,
-      selectedCategories: [...categories.map((element) => element.id)],
     },
-    dataFilters: {
-      title: "",
+    tableData: {
+      page: DEFAULT_PAGE,
+      pageSize: DEFAULT_PAGE_SIZE,
     },
-    switchFilters: {
-      publicationGroup: PublicationGroup.ALL,
+    selectedFilters: {
+      dropdownFilters: {
+        selectedAuthors: [...authors.map((element) => element.id)],
+        selectedCategories: [...categories.map((element) => element.id)],
+      },
+      dataFilters: {
+        title: "",
+      },
+      switchFilters: {
+        publicationGroup: PublicationGroup.ALL,
+      },
     },
     applyTimestamp: Date.now(),
   };

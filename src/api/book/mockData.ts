@@ -1,5 +1,6 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
-import { Book } from "models/book";
+import { PublicationGroup } from "constants/PublicationGroup";
+import { Book } from ".";
 import { BookKeyFactory } from "./keyFactory";
 
 const fetchDataForFilters = async (): Promise<Book[]> => {
@@ -9,15 +10,59 @@ const fetchDataForFilters = async (): Promise<Book[]> => {
 const fetchTableData = async ({
   queryKey,
 }: QueryFunctionContext): Promise<Book[]> => {
-  const { page, pageSize } = (<ReturnType<typeof BookKeyFactory.tableData>>(
-    queryKey
-  ))[0];
+  const { tableData, selectedFilters } = (<
+    ReturnType<typeof BookKeyFactory.tableData>
+  >queryKey)[0];
 
-  return Promise.resolve(mockedBooks.slice(page, page + pageSize));
+  if (!selectedFilters.dropdownFilters || !selectedFilters.switchFilters)
+    return Promise.reject();
+
+  const { publicationGroup } = selectedFilters.switchFilters;
+  const { selectedAuthors, selectedCategories } =
+    selectedFilters.dropdownFilters;
+
+  return Promise.resolve(
+    mockedBooks
+      .filter((element) => {
+        return (
+          selectedAuthors.some((id) => element.author_id === id) &&
+          selectedCategories.some((id) => element.category_id === id) &&
+          (publicationGroup === PublicationGroup.ONLY_LATEST
+            ? +element.publication_date > 2000
+            : publicationGroup === PublicationGroup.ONLY_OLD
+            ? +element.publication_date < 1900
+            : true)
+        );
+      })
+      .slice(tableData.page, tableData.page + tableData.pageSize),
+  );
 };
 
-const fetchCount = async (): Promise<number> => {
-  return Promise.resolve(mockedBooks.length);
+const fetchCount = async ({
+  queryKey,
+}: QueryFunctionContext): Promise<number> => {
+  const { dropdownFilters, switchFilters } = (<
+    ReturnType<typeof BookKeyFactory.count>
+  >queryKey)[0];
+
+  if (!dropdownFilters || !switchFilters) return Promise.reject();
+
+  const { publicationGroup } = switchFilters;
+  const { selectedAuthors, selectedCategories } = dropdownFilters;
+
+  return Promise.resolve(
+    mockedBooks.filter((element) => {
+      return (
+        selectedAuthors.some((id) => element.author_id === id) &&
+        selectedCategories.some((id) => element.category_id === id) &&
+        (publicationGroup === PublicationGroup.ONLY_LATEST
+          ? +element.publication_date > 2000
+          : publicationGroup === PublicationGroup.ONLY_OLD
+          ? +element.publication_date < 1900
+          : true)
+      );
+    }).length,
+  );
 };
 
 const fetchById = async ({ queryKey }: QueryFunctionContext): Promise<Book> => {

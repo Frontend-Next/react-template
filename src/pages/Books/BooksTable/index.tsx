@@ -5,13 +5,13 @@ import { BooksFilterActionType } from "../FilterReducer/types";
 import { useBooksTableView } from "./hook";
 
 export const BooksTable: FC = () => {
-  const { data, page, pageSize, dispatch } = useBooksTableView();
+  const { data, count, page, pageSize, dispatch } = useBooksTableView();
 
   return (
     <DataTable
       itemID="id"
       value={data}
-      totalRecords={50}
+      totalRecords={count}
       paginator
       first={page}
       rows={pageSize}

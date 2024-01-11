@@ -1,6 +1,5 @@
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
-import { PublicationGroup } from "constants/PublicationGroup";
-import { Book } from "models/book";
+import { Book, BooksExtendedFilterState, BooksFilterState } from ".";
 import { BookQuery } from "./query";
 
 export const useBookDataForFilters = (
@@ -17,42 +16,30 @@ export const useSuspenseBookDataForFilters = (
 
 export const useBookTableData = (
   isEnabled: boolean,
-  page: number,
-  pageSize: number,
-  authors: number[],
-  categories: number[],
-  publicationGroup: PublicationGroup,
+  filter: BooksFilterState,
 ) => {
-  return useQuery(
-    BookQuery.bookTableDataQuery(
-      isEnabled,
-      page,
-      pageSize,
-      authors,
-      categories,
-      publicationGroup,
-    ),
-  );
+  return useQuery(BookQuery.bookTableDataQuery(isEnabled, filter));
 };
 
 export const useSuspenseBookTableData = (
   isEnabled: boolean,
-  page: number,
-  pageSize: number,
-  authors: number[],
-  categories: number[],
-  publicationGroup: PublicationGroup,
+  filter: BooksFilterState,
 ) => {
-  return useSuspenseQuery(
-    BookQuery.bookTableDataQuery(
-      isEnabled,
-      page,
-      pageSize,
-      authors,
-      categories,
-      publicationGroup,
-    ),
-  );
+  return useSuspenseQuery(BookQuery.bookTableDataQuery(isEnabled, filter));
+};
+
+export const useBookCount = (
+  isEnabled: boolean,
+  extendedFilter: BooksExtendedFilterState,
+) => {
+  return useQuery(BookQuery.bookCountQuery(isEnabled, extendedFilter));
+};
+
+export const useSuspenseBookCount = (
+  isEnabled: boolean,
+  extendedFilter: BooksExtendedFilterState,
+) => {
+  return useSuspenseQuery(BookQuery.bookCountQuery(isEnabled, extendedFilter));
 };
 
 export const useBookById = (id: number) => {

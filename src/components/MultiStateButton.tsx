@@ -1,4 +1,4 @@
-import { Button } from "primereact/button";
+import { SplitButton } from "primereact/splitbutton";
 import { FC, useMemo, useState } from "react";
 
 interface MultiStateButtonProps {
@@ -19,26 +19,34 @@ export const MultiStateButton: FC<MultiStateButtonProps> = ({
   value,
   onValueChangeHandler,
 }) => {
-  const [buttonStates] = useState(states);
   const [activeState, setActiveState] = useState(
     value !== undefined ? value : states[0].value,
   );
 
   const activeStateIndex = useMemo(() => {
-    const index = buttonStates.findIndex(
-      (element) => element.value === activeState,
-    );
+    const index = states.findIndex((element) => element.value === activeState);
     return index;
-  }, [buttonStates, activeState]);
+  }, [states, activeState]);
 
-  const setNextActiveState = () => {
+  const items = useMemo(
+    () =>
+      states.map((state) => ({
+        label: state.label,
+        command: () => setActiveStateHandler(state.value),
+      })),
+    [states],
+  );
+
+  const setActiveStateHandler = (newActiveState: typeof activeState): void => {
+    setActiveState(newActiveState);
+    if (onValueChangeHandler) onValueChangeHandler(newActiveState);
+  };
+
+  const setNextActiveState = (): void => {
     setActiveState((prevState) => {
-      const index = buttonStates.findIndex(
-        (element) => element.value === prevState,
-      );
+      const index = states.findIndex((element) => element.value === prevState);
 
-      const newValue =
-        buttonStates[index + 1 >= buttonStates.length ? 0 : index + 1].value;
+      const newValue = states[index + 1 >= states.length ? 0 : index + 1].value;
 
       if (onValueChangeHandler) onValueChangeHandler(newValue);
 
@@ -47,9 +55,10 @@ export const MultiStateButton: FC<MultiStateButtonProps> = ({
   };
 
   return (
-    <Button
-      label={buttonStates[activeStateIndex].label}
-      onClick={() => setNextActiveState()}
+    <SplitButton
+      label={states[activeStateIndex].label}
+      onClick={setNextActiveState}
+      model={items}
     />
   );
 };

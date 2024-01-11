@@ -1,32 +1,34 @@
+import { Book, BooksFilterState } from "api/book";
 import { PublicationGroup } from "constants/PublicationGroup";
-import { Book } from "models/book";
+import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from "constants/TableDefaults";
 
-export type BooksFilterReducer = (
-  state: BooksFilterState,
-  action: BooksFilterActions,
-) => BooksFilterState;
-
-export interface BooksFilterState {
-  tableData?: {
-    page: number;
-    pageSize: number;
-  };
-  dropdownFilters?: {
+export interface BooksFilterReducerState extends BooksFilterState {
+  filterData?: {
     bookDataForFilters: Book[];
     selectedBookFilterData: Book[];
+
     allAuthors: FilterRow[];
-    selectedAuthors: number[];
     allCategories: FilterRow[];
-    selectedCategories: number[];
   };
-  switchFilters?: {
-    publicationGroup: PublicationGroup;
-  };
-  dataFilters?: {
-    title: string;
-  };
-  applyTimestamp?: number;
 }
+
+export const DEFAULT_BOOKS_FILTER_REDUCER_STATE: BooksFilterReducerState = {
+  tableData: {
+    page: DEFAULT_PAGE,
+    pageSize: DEFAULT_PAGE_SIZE,
+  },
+  selectedFilters: {
+    dropdownFilters: {
+      selectedAuthors: [],
+      selectedCategories: [],
+    },
+  },
+};
+
+export type BooksFilterReducer = (
+  state: BooksFilterReducerState,
+  action: BooksFilterActions,
+) => BooksFilterReducerState;
 
 export enum BooksFilterActionType {
   SetFiltersData,
@@ -39,40 +41,40 @@ export enum BooksFilterActionType {
   Apply,
 }
 
-type SetFiltersDataAction = {
+export type SetFiltersDataAction = {
   type: BooksFilterActionType.SetFiltersData;
   payload: Book[];
 };
 
-type PageChangeAction = {
+export type PageChangeAction = {
   type: BooksFilterActionType.PageChange;
-  payload: {page: number, pageSize: number};
+  payload: { page: number; pageSize: number };
 };
 
-type AuthorChangeAction = {
+export type AuthorChangeAction = {
   type: BooksFilterActionType.AuthorChange;
   payload: number[];
 };
 
-type CategoryChangeAction = {
+export type CategoryChangeAction = {
   type: BooksFilterActionType.CategoryChange;
   payload: number[];
 };
 
-type PublicationGroupChangeAction = {
+export type PublicationGroupChangeAction = {
   type: BooksFilterActionType.PublicationGroupChange;
   payload: PublicationGroup;
 };
 
-type SelectAllAction = {
+export type SelectAllAction = {
   type: BooksFilterActionType.SelectAll;
 };
 
-type ClearAction = {
+export type ClearAction = {
   type: BooksFilterActionType.Clear;
 };
 
-type ApplyAction = {
+export type ApplyAction = {
   type: BooksFilterActionType.Apply;
 };
 

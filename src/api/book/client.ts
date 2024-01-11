@@ -1,10 +1,9 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
-import { Book } from "models/book";
+import { Config } from "constants/Config";
 import { axiosInstance } from "services/AxiosConfig";
+import { Book } from ".";
 import { BookKeyFactory } from "./keyFactory";
 import { BookMockedClient } from "./mockData";
-
-const mockData: boolean = true;
 
 const fetchDataForFilters = async (): Promise<Book[]> => {
   return axiosInstance
@@ -12,13 +11,33 @@ const fetchDataForFilters = async (): Promise<Book[]> => {
     .then((response) => response.data);
 };
 
-const fetchTableData = async (): Promise<Book[]> => {
-  return axiosInstance.get<Book[]>("books").then((response) => response.data);
+const fetchTableData = async ({
+  queryKey,
+}: QueryFunctionContext): Promise<Book[]> => {
+  const { tableData, selectedFilters } = (<
+    ReturnType<typeof BookKeyFactory.tableData>
+  >queryKey)[0];
+  return axiosInstance
+    .post<Book[]>("books", {
+      page: tableData?.page,
+      pageSize: tableData?.pageSize,
+      ...selectedFilters,
+    })
+    .then((response) => response.data);
 };
 
-const fetchCount = async (): Promise<number> => {
+const fetchCount = async ({
+  queryKey,
+}: QueryFunctionContext): Promise<number> => {
+  const { dataFilters, dropdownFilters, switchFilters } = (<
+    ReturnType<typeof BookKeyFactory.count>
+  >queryKey)[0];
   return axiosInstance
-    .get<number>("books/count")
+    .post<number>("books/count", {
+      ...dataFilters,
+      ...dropdownFilters,
+      ...switchFilters,
+    })
     .then((response) => response.data);
 };
 
@@ -29,7 +48,7 @@ const fetchById = async ({ queryKey }: QueryFunctionContext): Promise<Book> => {
     .then((response) => response.data);
 };
 
-export const BookClient = mockData
+export const BookClient = Config.USE_MOCKED_DATA
   ? { ...BookMockedClient }
   : {
       fetchDataForFilters,
