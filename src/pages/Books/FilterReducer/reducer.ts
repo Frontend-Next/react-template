@@ -1,6 +1,5 @@
 import { BookUtils } from "utils/BookUtils";
 import { BooksFilterReducerActions } from "./actions";
-import { booksReducerInitializerFunction } from "./initializer";
 import {
   BooksFilterActionType,
   BooksFilterActions,
@@ -17,49 +16,13 @@ export const booksFilterReducer: BooksFilterReducer = (
       return BooksFilterReducerActions.setFiltersData(action);
 
     case BooksFilterActionType.SelectAll:
-      if (!state.filterData?.bookDataForFilters) return { ...state };
-      return booksReducerInitializerFunction(
-        state.filterData.bookDataForFilters,
-      );
+      return BooksFilterReducerActions.selectAll(state);
 
     case BooksFilterActionType.PageChange:
-      return { ...state, tableData: { ...state.tableData, ...action.payload } };
+      return BooksFilterReducerActions.pageChange(state, action);
 
     case BooksFilterActionType.AuthorChange:
-      if (
-        !state.filterData?.bookDataForFilters ||
-        !state.selectedFilters?.dropdownFilters
-      )
-        return { ...state };
-
-      const newSelectedBookFilterDataByAuthor =
-        state.filterData.bookDataForFilters.filter((book) =>
-          action.payload.some((value) => value === book.author_id),
-        );
-
-      const categories: FilterRow[] =
-        BookUtils.uniqueFilterRowFromBookArrayByKey(
-          newSelectedBookFilterDataByAuthor || [],
-          "category_id",
-          "category",
-        );
-
-      return {
-        ...state,
-        filterData: {
-          ...state.filterData,
-          selectedBookFilterData: newSelectedBookFilterDataByAuthor,
-          allCategories: categories,
-        },
-        selectedFilters: {
-          ...state.selectedFilters,
-          dropdownFilters: {
-            ...state.selectedFilters.dropdownFilters,
-            selectedAuthors: action.payload,
-            selectedCategories: [...categories.map((element) => element.id)],
-          },
-        },
-      };
+      return BooksFilterReducerActions.authorChange(state, action);
 
     case BooksFilterActionType.CategoryChange:
       if (
