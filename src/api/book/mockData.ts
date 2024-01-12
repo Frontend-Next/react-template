@@ -1,5 +1,5 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
-import { PublicationGroup } from "constants/PublicationGroup";
+import { PublicationGroup } from "common/constants/PublicationGroup";
 import { Book } from ".";
 import { BookKeyFactory } from "./keyFactory";
 

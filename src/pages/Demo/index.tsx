@@ -1,4 +1,4 @@
-import { MultiStateButton } from "components/MultiStateButton";
+import { MultiStateButton } from "common/components/MultiStateButton";
 import { FC } from "react";
 
 export const Demo: FC = () => {

@@ -1,7 +1,10 @@
 import { Book } from "api/book";
-import { PublicationGroup } from "constants/PublicationGroup";
-import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from "constants/TableDefaults";
-import { BookUtils } from "utils/BookUtils";
+import { PublicationGroup } from "common/constants/PublicationGroup";
+import {
+  DEFAULT_PAGE,
+  DEFAULT_PAGE_SIZE,
+} from "common/constants/TableDefaults";
+import { BookUtils } from "common/utils/BookUtils";
 import { BooksFilterReducerState } from "./types";
 
 export const booksReducerInitializerFunction = (

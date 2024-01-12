@@ -1,4 +1,4 @@
-import { BookUtils } from "utils/BookUtils";
+import { BookUtils } from "common/utils/BookUtils";
 import { AuthorChangeAction, BooksFilterReducerState } from "../types";
 
 export const authorChange = (

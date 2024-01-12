@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { SecurityContextProvider } from "contexts/SecurityContext";
+import { SecurityContextProvider } from "common/contexts/SecurityContext";
 import { FC, PropsWithChildren } from "react";
 
 const queryClient = new QueryClient();

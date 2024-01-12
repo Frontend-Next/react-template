@@ -1,5 +1,5 @@
-import { MultiStateButton } from "components/MultiStateButton";
-import { PublicationGroup } from "constants/PublicationGroup";
+import { MultiStateButton } from "common/components/MultiStateButton";
+import { PublicationGroup } from "common/constants/PublicationGroup";
 import { FC, useMemo } from "react";
 
 interface LatestBooksFilterButtonProps {

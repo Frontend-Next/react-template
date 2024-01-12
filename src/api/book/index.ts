@@ -1,4 +1,5 @@
-import { PublicationGroup } from "constants/PublicationGroup";
+import { PublicationGroup } from "common/constants/PublicationGroup";
+import { DataTableFilterState } from "common/types/DataTableFilterState";
 
 export interface Book {
   id: number;

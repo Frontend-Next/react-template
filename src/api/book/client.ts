@@ -1,6 +1,6 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
-import { Config } from "constants/Config";
-import { axiosInstance } from "services/AxiosConfig";
+import { Config } from "common/constants/Config";
+import { axiosInstance } from "common/services/AxiosConfig";
 import { Book } from ".";
 import { BookKeyFactory } from "./keyFactory";
 import { BookMockedClient } from "./mockData";

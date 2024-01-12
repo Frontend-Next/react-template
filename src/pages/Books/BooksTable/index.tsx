@@ -1,7 +1,7 @@
+import { DataTableActionType } from "common/reducers/DataTableReducer/types";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { FC } from "react";
-import { BooksFilterActionType } from "../FilterReducer/types";
 import { useBooksTableView } from "./hook";
 
 export const BooksTable: FC = () => {
@@ -20,7 +20,7 @@ export const BooksTable: FC = () => {
       lazy
       onPage={(event) =>
         dispatch({
-          type: BooksFilterActionType.PageChange,
+          type: DataTableActionType.PageChange,
           payload: { page: event.first, pageSize: event.rows },
         })
       }

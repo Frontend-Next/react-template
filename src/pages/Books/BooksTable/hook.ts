@@ -1,6 +1,9 @@
 import { Book, BooksFilterState } from "api/book";
 import { useBookCount, useBookTableData } from "api/book/hook";
-import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE } from "constants/TableDefaults";
+import {
+  DEFAULT_PAGE,
+  DEFAULT_PAGE_SIZE,
+} from "common/constants/TableDefaults";
 import { Dispatch, useMemo } from "react";
 import { useBooksListContext } from "../Context/hook";
 import {

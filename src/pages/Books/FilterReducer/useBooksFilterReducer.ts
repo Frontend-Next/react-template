@@ -1,6 +1,5 @@
-import { Book } from "api/book";
 import { useBookDataForFilters } from "api/book/hook";
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { booksFilterReducer } from "./reducer";
 import {
   BooksFilterActionType,
@@ -9,10 +8,12 @@ import {
 } from "./types";
 
 export const useBooksFilterReducer = () => {
-  const {} = useBookDataForFilters((books: Book[]) => {
-    dispatch({ type: BooksFilterActionType.SetFiltersData, payload: books });
-    return books;
-  });
+  const { data } = useBookDataForFilters();
+
+  useEffect(() => {
+    if (data)
+      dispatch({ type: BooksFilterActionType.SetFiltersData, payload: data });
+  }, [data]);
 
   const [state, dispatch] = useReducer<BooksFilterReducer>(
     booksFilterReducer,

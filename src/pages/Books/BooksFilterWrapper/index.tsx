@@ -1,9 +1,9 @@
-import { FilterMultiSelect } from "components/FilterMultiSelect";
-import { FilterWrapper } from "components/FilterWrapper";
-import { FilterWrapperRow } from "components/FilterWrapper/row";
+import { FilterMultiSelect } from "common/components/FilterMultiSelect";
+import { FilterWrapper } from "common/components/FilterWrapper";
+import { FilterWrapperRow } from "common/components/FilterWrapper/row";
 import { Skeleton } from "primereact/skeleton";
 import { FC } from "react";
-import { LatestBooksFilterButton } from "../../../components/LatestBooksFilterButton";
+import { LatestBooksFilterButton } from "../../../common/components/LatestBooksFilterButton";
 import { useBooksListContext } from "../Context/hook";
 import { BooksFilterActionType } from "../FilterReducer/types";
 

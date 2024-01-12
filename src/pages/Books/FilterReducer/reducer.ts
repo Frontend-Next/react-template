@@ -1,4 +1,5 @@
-import { BookUtils } from "utils/BookUtils";
+import { dataTableReducer } from "common/reducers/DataTableReducer/reducer";
+import { BookUtils } from "common/utils/BookUtils";
 import { BooksFilterReducerActions } from "./actions";
 import {
   BooksFilterActionType,
@@ -13,13 +14,14 @@ export const booksFilterReducer: BooksFilterReducer = (
 ): BooksFilterReducerState => {
   switch (action.type) {
     case BooksFilterActionType.SetFiltersData:
+      console.log("SetFiltersData", action);
       return BooksFilterReducerActions.setFiltersData(action);
 
     case BooksFilterActionType.SelectAll:
       return BooksFilterReducerActions.selectAll(state);
 
-    case BooksFilterActionType.PageChange:
-      return BooksFilterReducerActions.pageChange(state, action);
+    // case BooksFilterActionType.PageChange:
+    //   return BooksFilterReducerActions.pageChange(state, action);
 
     case BooksFilterActionType.AuthorChange:
       return BooksFilterReducerActions.authorChange(state, action);
@@ -82,7 +84,11 @@ export const booksFilterReducer: BooksFilterReducer = (
         applyTimestamp: Date.now(),
       };
 
-    default:
+    case BooksFilterActionType.Clear:
       return state;
+
+    default:
+      console.log("default");
+      return { ...state, ...dataTableReducer(state, action) };
   }
 };

@@ -3,14 +3,10 @@ import { Book, BooksExtendedFilterState, BooksFilterState } from ".";
 import { BookClient } from "./client";
 import { BookKeyFactory } from "./keyFactory";
 
-const bookDataForFiltersQuery = (
-  selectFunction: (books: Book[]) => Book[],
-): UseQueryOptions<Book[]> => ({
+const bookDataForFiltersQuery = (): UseQueryOptions<Book[]> => ({
   queryKey: BookKeyFactory.dataForFilters(),
   queryFn: BookClient.fetchDataForFilters,
   staleTime: Infinity,
-  select: selectFunction,
-  notifyOnChangeProps: [],
 });
 
 const bookTableDataQuery = (

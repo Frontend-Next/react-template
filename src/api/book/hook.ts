@@ -1,17 +1,13 @@
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
-import { Book, BooksExtendedFilterState, BooksFilterState } from ".";
+import { BooksExtendedFilterState, BooksFilterState } from ".";
 import { BookQuery } from "./query";
 
-export const useBookDataForFilters = (
-  selectFunction: (books: Book[]) => Book[],
-) => {
-  return useQuery(BookQuery.bookDataForFiltersQuery(selectFunction));
+export const useBookDataForFilters = () => {
+  return useQuery(BookQuery.bookDataForFiltersQuery());
 };
 
-export const useSuspenseBookDataForFilters = (
-  selectFunction: (books: Book[]) => Book[],
-) => {
-  return useSuspenseQuery(BookQuery.bookDataForFiltersQuery(selectFunction));
+export const useSuspenseBookDataForFilters = () => {
+  return useSuspenseQuery(BookQuery.bookDataForFiltersQuery());
 };
 
 export const useBookTableData = (
