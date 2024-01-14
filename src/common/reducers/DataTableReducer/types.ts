@@ -26,7 +26,7 @@ export enum DataTableActionType {
   PageChange = "PAGE_CHANGE",
 }
 
-export type PageChangeAction = {
+type PageChangeAction = {
   type: DataTableActionType.PageChange;
   payload: { page: number; pageSize: number };
 };

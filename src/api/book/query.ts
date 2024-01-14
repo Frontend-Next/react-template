@@ -13,7 +13,7 @@ const bookTableDataQuery = (
   isEnabled: boolean,
   filter: BooksFilterState,
 ): UseQueryOptions<Book[]> => ({
-  queryKey: BookKeyFactory.tableData(filter),
+  queryKey: BookKeyFactory.pageData(filter),
   queryFn: BookClient.fetchTableData,
   enabled: isEnabled,
 });
