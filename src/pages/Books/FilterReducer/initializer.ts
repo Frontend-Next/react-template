@@ -5,11 +5,11 @@ import {
   DEFAULT_PAGE_SIZE,
 } from "common/constants/TableDefaults";
 import { BookUtils } from "common/utils/BookUtils";
-import { BooksFilterReducerState } from "./types";
+import { BookFilterReducerState } from "./types";
 
 export const booksReducerInitializerFunction = (
   books: Book[],
-): BooksFilterReducerState => {
+): BookFilterReducerState => {
   const authors = BookUtils.uniqueFilterRowFromBookArrayByKey(
     books,
     "author_id",
@@ -24,8 +24,8 @@ export const booksReducerInitializerFunction = (
 
   return {
     filterData: {
-      bookDataForFilters: books,
-      selectedBookFilterData: books,
+      dataForFilters: books,
+      selectedFilterData: books,
       allAuthors: authors,
       allCategories: categories,
     },

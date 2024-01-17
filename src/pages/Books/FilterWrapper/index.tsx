@@ -5,22 +5,23 @@ import { Skeleton } from "primereact/skeleton";
 import { FC } from "react";
 import { LatestBooksFilterButton } from "../../../common/components/LatestBooksFilterButton";
 import { useBooksListContext } from "../Context/hook";
-import { BooksFilterActionType } from "../FilterReducer/types";
+import { BookFilterActionType } from "../FilterReducer/types";
 
 export const BooksFilterWrapper: FC = () => {
-  const { filterState, dispatch } = useBooksListContext();
-  const { filterData } = filterState;
-  const { dropdownFilters, switchFilters } = filterState.selectedFilters;
+  const {
+    filterState: { filterData, selectedFilters },
+    dispatch,
+  } = useBooksListContext();
 
   const applyHandler = () => {
     dispatch({
-      type: BooksFilterActionType.Apply,
+      type: BookFilterActionType.Apply,
     });
   };
 
   const selectAllHandler = () => {
     dispatch({
-      type: BooksFilterActionType.SelectAll,
+      type: BookFilterActionType.SelectAll,
     });
   };
 
@@ -32,11 +33,11 @@ export const BooksFilterWrapper: FC = () => {
       <FilterWrapperRow>
         <FilterMultiSelect
           placeholder="Select Authors"
-          value={dropdownFilters?.selectedAuthors}
+          value={selectedFilters?.dropdownFilters?.selectedAuthors}
           options={filterData?.allAuthors}
           onChangeHandler={(value) =>
             dispatch({
-              type: BooksFilterActionType.AuthorChange,
+              type: BookFilterActionType.AuthorChange,
               payload: value,
             })
           }
@@ -44,11 +45,11 @@ export const BooksFilterWrapper: FC = () => {
 
         <FilterMultiSelect
           placeholder="Select Categories"
-          value={dropdownFilters?.selectedCategories}
+          value={selectedFilters?.dropdownFilters?.selectedCategories}
           options={filterData?.allCategories}
           onChangeHandler={(value) =>
             dispatch({
-              type: BooksFilterActionType.CategoryChange,
+              type: BookFilterActionType.CategoryChange,
               payload: value,
             })
           }
@@ -56,14 +57,14 @@ export const BooksFilterWrapper: FC = () => {
       </FilterWrapperRow>
 
       <FilterWrapperRow>
-        {!switchFilters ? (
+        {!selectedFilters?.switchFilters ? (
           <Skeleton className="h-3rem w-20rem" />
         ) : (
           <LatestBooksFilterButton
-            currentValue={switchFilters.publicationGroup}
+            currentValue={selectedFilters?.switchFilters.publicationGroup}
             onValueChangeHandler={(newValue) =>
               dispatch({
-                type: BooksFilterActionType.PublicationGroupChange,
+                type: BookFilterActionType.PublicationGroupChange,
                 payload: newValue,
               })
             }

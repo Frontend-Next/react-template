@@ -1,9 +1,9 @@
 import { booksReducerInitializerFunction } from "../initializer";
-import { BooksFilterReducerState } from "../types";
+import { BookFilterReducerState } from "../types";
 
 export const selectAll = (
-  state: BooksFilterReducerState,
-): BooksFilterReducerState => {
-  if (!state.filterData?.bookDataForFilters) return { ...state };
-  return booksReducerInitializerFunction(state.filterData.bookDataForFilters);
+  state: BookFilterReducerState,
+): BookFilterReducerState => {
+  if (!state.filterData?.dataForFilters) return { ...state };
+  return booksReducerInitializerFunction(state.filterData.dataForFilters);
 };

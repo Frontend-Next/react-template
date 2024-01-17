@@ -1,8 +1,9 @@
+import { SetFiltersDataAction } from "common/reducers/FilteredDataTableReducer/types";
 import { booksReducerInitializerFunction } from "../initializer";
-import { BooksFilterReducerState, SetFiltersDataAction } from "../types";
+import { BookFilterReducerState } from "../types";
 
 export const setFiltersData = (
   action: SetFiltersDataAction,
-): BooksFilterReducerState => {
+): BookFilterReducerState => {
   return booksReducerInitializerFunction(action.payload);
 };

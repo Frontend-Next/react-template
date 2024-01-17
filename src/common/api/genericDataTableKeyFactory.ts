@@ -7,6 +7,6 @@ export const genericDataTableKeyFactory = (domain: string) => ({
     [
       { ...genericKeyFactory(domain).list(), name: "page-data", filter },
     ] as const,
-  count: () =>
-    [{ ...genericKeyFactory(domain).list(), name: "count" }] as const,
+  dataCount: () =>
+    [{ ...genericKeyFactory(domain).list(), name: "data-count" }] as const,
 });

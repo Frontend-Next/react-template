@@ -1,67 +1,22 @@
-import { dataTableReducer } from "common/reducers/DataTableReducer/reducer";
-import { BookUtils } from "common/utils/BookUtils";
-import { BooksFilterReducerActions } from "./actions";
+import { filteredDataTableReducer } from "common/reducers/FilteredDataTableReducer/reducer";
+import { BookFilterReducerActions } from "pages/Books/FilterReducer/actions";
 import {
-  BooksFilterActionType,
-  BooksFilterActions,
-  BooksFilterReducer,
-  BooksFilterReducerState,
-} from "./types";
+  BookFilterActionType,
+  BookFilterReducer,
+} from "pages/Books/FilterReducer/types";
 
-export const booksFilterReducer: BooksFilterReducer = (
-  state: BooksFilterReducerState,
-  action: BooksFilterActions,
-): BooksFilterReducerState => {
+export const bookFilterReducer: BookFilterReducer = (state, action) => {
   switch (action.type) {
-    case BooksFilterActionType.SetFiltersData:
-      console.log("SetFiltersData", action);
-      return BooksFilterReducerActions.setFiltersData(action);
+    case BookFilterActionType.SetFiltersData:
+      return BookFilterReducerActions.setFiltersData(action);
 
-    case BooksFilterActionType.SelectAll:
-      return BooksFilterReducerActions.selectAll(state);
+    case BookFilterActionType.AuthorChange:
+      return BookFilterReducerActions.authorChange(state, action);
 
-    // case BooksFilterActionType.PageChange:
-    //   return BooksFilterReducerActions.pageChange(state, action);
+    case BookFilterActionType.CategoryChange:
+      return BookFilterReducerActions.categoryChange(state, action);
 
-    case BooksFilterActionType.AuthorChange:
-      return BooksFilterReducerActions.authorChange(state, action);
-
-    case BooksFilterActionType.CategoryChange:
-      if (
-        !state.filterData?.bookDataForFilters ||
-        !state.selectedFilters?.dropdownFilters
-      )
-        return { ...state };
-
-      const newSelectedBookFilterDataByCategory =
-        state.filterData.bookDataForFilters.filter((book) =>
-          action.payload.some((value) => value === book.category_id),
-        );
-
-      const authors = BookUtils.uniqueFilterRowFromBookArrayByKey(
-        newSelectedBookFilterDataByCategory || [],
-        "author_id",
-        "author",
-      );
-
-      return {
-        ...state,
-        filterData: {
-          ...state.filterData,
-          selectedBookFilterData: newSelectedBookFilterDataByCategory,
-          allAuthors: authors,
-        },
-        selectedFilters: {
-          ...state.selectedFilters,
-          dropdownFilters: {
-            ...state.selectedFilters.dropdownFilters,
-            selectedAuthors: [...authors.map((element) => element.id)],
-            selectedCategories: action.payload,
-          },
-        },
-      };
-
-    case BooksFilterActionType.PublicationGroupChange:
+    case BookFilterActionType.PublicationGroupChange:
       if (!state.selectedFilters?.switchFilters) return { ...state };
 
       return {
@@ -77,18 +32,14 @@ export const booksFilterReducer: BooksFilterReducer = (
         applyTimestamp: Date.now(),
       };
 
-    case BooksFilterActionType.Apply:
+    case BookFilterActionType.Apply:
       return {
         ...state,
         tableData: { ...state.tableData, page: 0 },
         applyTimestamp: Date.now(),
       };
 
-    case BooksFilterActionType.Clear:
-      return state;
-
     default:
-      console.log("default");
-      return { ...state, ...dataTableReducer(state, action) };
+      return { ...state, ...filteredDataTableReducer(state, action) };
   }
 };

@@ -1,40 +1,36 @@
 import { UseQueryOptions } from "@tanstack/react-query";
-import { Book, BooksExtendedFilterState, BooksFilterState } from ".";
+import { Book, BookFilterState } from "api/book";
+import { DataTableReducerState } from "common/reducers/DataTableReducer/types";
 import { BookClient } from "./client";
 import { BookKeyFactory } from "./keyFactory";
 
-const bookDataForFiltersQuery = (): UseQueryOptions<Book[]> => ({
+const dataForFiltersQuery = (): UseQueryOptions<Book[]> => ({
   queryKey: BookKeyFactory.dataForFilters(),
-  queryFn: BookClient.fetchDataForFilters,
+  queryFn: BookClient.provideDataForFilters,
   staleTime: Infinity,
 });
 
-const bookTableDataQuery = (
+const pageDataQuery = (
   isEnabled: boolean,
-  filter: BooksFilterState,
+  dataTable: DataTableReducerState,
+  filter: BookFilterState,
 ): UseQueryOptions<Book[]> => ({
-  queryKey: BookKeyFactory.pageData(filter),
-  queryFn: BookClient.fetchTableData,
+  queryKey: BookKeyFactory.pageData(dataTable, filter),
+  queryFn: BookClient.providePageData,
   enabled: isEnabled,
 });
 
-const bookCountQuery = (
+const dataCountQuery = (
   isEnabled: boolean,
-  extendedFilter: BooksExtendedFilterState,
+  filter: BookFilterState,
 ): UseQueryOptions<number> => ({
-  queryKey: BookKeyFactory.count(extendedFilter),
-  queryFn: BookClient.fetchCount,
+  queryKey: BookKeyFactory.dataCount(filter),
+  queryFn: BookClient.provideDataCount,
   enabled: isEnabled,
-});
-
-const bookByIdQuery = (id: number): UseQueryOptions<Book> => ({
-  queryKey: BookKeyFactory.bookById(id),
-  queryFn: BookClient.fetchById,
 });
 
 export const BookQuery = {
-  bookDataForFiltersQuery,
-  bookTableDataQuery,
-  bookCountQuery,
-  bookByIdQuery,
+  dataForFiltersQuery,
+  pageDataQuery,
+  dataCountQuery,
 };

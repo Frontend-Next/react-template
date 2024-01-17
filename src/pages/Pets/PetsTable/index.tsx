@@ -5,21 +5,19 @@ import { FC } from "react";
 import { usePetsTableView } from "./hook";
 
 export const PetsTable: FC = () => {
-  const { page, pageSize, pageData, count, isLoading, dispatch } =
-    usePetsTableView();
+  const { page, pageSize, pageData, dataCount, dispatch } = usePetsTableView();
 
   return (
     <DataTable
-      lazy
+      itemID="id"
+      value={pageData}
+      totalRecords={dataCount}
       paginator
       first={page}
       rows={pageSize}
       rowsPerPageOptions={[5, 10, 25, 50]}
-      loading={isLoading}
       stripedRows
-      itemID="id"
-      value={pageData}
-      totalRecords={count}
+      lazy
       onPage={(event) =>
         dispatch({
           type: DataTableActionType.PageChange,

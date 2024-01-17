@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { BooksFilterWrapper } from "./BooksFilterWrapper";
-import { BooksTable } from "./BooksTable";
-import { BooksListContextProvider } from "./Context";
+import { BookListContextProvider } from "./Context";
+import { BooksTable } from "./DataTable";
+import { BooksFilterWrapper } from "./FilterWrapper";
 
 export const BooksList: FC = () => {
   return (
@@ -11,11 +11,11 @@ export const BooksList: FC = () => {
       </header>
 
       <main>
-        <BooksListContextProvider>
+        <BookListContextProvider>
           <BooksFilterWrapper />
 
           <BooksTable />
-        </BooksListContextProvider>
+        </BookListContextProvider>
       </main>
     </>
   );

@@ -5,32 +5,29 @@ import {
   DEFAULT_DATA_TABLE_REDUCER_STATE,
   DataTableReducer,
   DataTableReducerActions,
+  DataTableReducerState,
 } from "common/reducers/DataTableReducer/types";
 import { Dispatch, useReducer } from "react";
 
-type UsePetsTableViewType = {
-  page: number;
-  pageSize: number;
+interface UsePetsTableViewType extends DataTableReducerState {
   pageData: Pet[] | undefined;
-  count: number | undefined;
-  isLoading: boolean;
+  dataCount: number | undefined;
   dispatch: Dispatch<DataTableReducerActions>;
-};
+}
 
 export const usePetsTableView = (): UsePetsTableViewType => {
   const [state, dispatch] = useReducer<DataTableReducer>(
     dataTableReducer,
     DEFAULT_DATA_TABLE_REDUCER_STATE,
   );
-  const { data: pageData, isLoading } = usePetPageData(state);
-  const { data: count } = usePetCount();
+  const { data: pageData } = usePetPageData(state);
+  const { data: dataCount } = usePetCount();
 
   return {
-    page: state.tableData.page,
-    pageSize: state.tableData.pageSize,
+    page: state.page,
+    pageSize: state.pageSize,
     pageData,
-    count,
-    isLoading,
+    dataCount,
     dispatch,
   };
 };

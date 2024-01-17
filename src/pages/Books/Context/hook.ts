@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { BooksListContext, BooksListContextType } from ".";
+import { BookListContext, BookListContextType } from ".";
 
-export const useBooksListContext = (): BooksListContextType => {
-  const context = useContext(BooksListContext);
+export const useBooksListContext = (): BookListContextType => {
+  const context = useContext(BookListContext);
 
   if (!context)
     throw new Error("useBooksListContext must be used within BooksListContext");

@@ -1,26 +1,27 @@
-import { Book, BooksFilterState } from "api/book";
+import { Book, BookFilterState } from "api/book";
 import { PublicationGroup } from "common/constants/PublicationGroup";
+import { DEFAULT_DATA_TABLE_REDUCER_STATE } from "common/reducers/DataTableReducer/types";
 import {
-  DEFAULT_DATA_TABLE_REDUCER_STATE,
-  DataTableActionType,
-  DataTableReducerActions,
-  DataTableReducerState,
-} from "common/reducers/DataTableReducer/types";
+  FilteredDataTableActionType,
+  FilteredDataTableReducerActions,
+  FilteredDataTableReducerState,
+} from "common/reducers/FilteredDataTableReducer/types";
 
-export interface BooksFilterReducerState
-  extends DataTableReducerState,
-    BooksFilterState {
-  filterData?: {
-    bookDataForFilters: Book[];
-    selectedBookFilterData: Book[];
+export interface BookFilterDataReducerState {
+  dataForFilters: Book[];
+  selectedFilterData: Book[];
 
-    allAuthors: FilterRow[];
-    allCategories: FilterRow[];
-  };
+  allAuthors: FilterRow[];
+  allCategories: FilterRow[];
 }
 
-export const DEFAULT_BOOKS_FILTER_REDUCER_STATE: BooksFilterReducerState = {
-  ...DEFAULT_DATA_TABLE_REDUCER_STATE,
+export type BookFilterReducerState = FilteredDataTableReducerState<
+  BookFilterState,
+  BookFilterDataReducerState
+>;
+
+export const DEFAULT_BOOK_FILTER_REDUCER_STATE: BookFilterReducerState = {
+  tableData: { ...DEFAULT_DATA_TABLE_REDUCER_STATE },
   selectedFilters: {
     dropdownFilters: {
       selectedAuthors: [],
@@ -29,65 +30,40 @@ export const DEFAULT_BOOKS_FILTER_REDUCER_STATE: BooksFilterReducerState = {
   },
 };
 
-export type BooksFilterReducer = (
-  state: BooksFilterReducerState,
-  action: BooksFilterActions,
-) => BooksFilterReducerState;
-
-export enum BooksFilterActionsEnum {
-  SetFiltersData = "SET_FILTERS_DATA",
+enum BookFilterActionsEnum {
   AuthorChange = "AUTHOR_CHANGE",
   CategoryChange = "CATEGORY_CHANGE",
   PublicationGroupChange = "PUBLICATION_GROUP_CHANGE",
-  SelectAll = "SELECT_ALL",
-  Clear = "CLEAR",
-  Apply = "APPLY",
 }
 
-export const BooksFilterActionType = {
-  ...DataTableActionType,
-  ...BooksFilterActionsEnum,
+export const BookFilterActionType = {
+  ...FilteredDataTableActionType,
+  ...BookFilterActionsEnum,
 };
-export type BooksFilterActionType = typeof BooksFilterActionType;
-
-export type SetFiltersDataAction = {
-  type: BooksFilterActionType["SetFiltersData"];
-  payload: Book[];
-};
+export type BookFilterActionType = typeof BookFilterActionType;
 
 export type AuthorChangeAction = {
-  type: BooksFilterActionType["AuthorChange"];
+  type: BookFilterActionType["AuthorChange"];
   payload: number[];
 };
 
 export type CategoryChangeAction = {
-  type: BooksFilterActionType["CategoryChange"];
+  type: BookFilterActionType["CategoryChange"];
   payload: number[];
 };
 
 export type PublicationGroupChangeAction = {
-  type: BooksFilterActionType["PublicationGroupChange"];
+  type: BookFilterActionType["PublicationGroupChange"];
   payload: PublicationGroup;
 };
 
-export type SelectAllAction = {
-  type: BooksFilterActionType["SelectAll"];
-};
-
-export type ClearAction = {
-  type: BooksFilterActionType["Clear"];
-};
-
-export type ApplyAction = {
-  type: BooksFilterActionType["Apply"];
-};
-
-export type BooksFilterActions =
-  | DataTableReducerActions
-  | SetFiltersDataAction
+export type BookFilterActions =
+  | FilteredDataTableReducerActions
   | AuthorChangeAction
   | CategoryChangeAction
-  | PublicationGroupChangeAction
-  | SelectAllAction
-  | ClearAction
-  | ApplyAction;
+  | PublicationGroupChangeAction;
+
+export type BookFilterReducer = (
+  state: BookFilterReducerState,
+  action: BookFilterActions,
+) => BookFilterReducerState;

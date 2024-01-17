@@ -1,10 +1,7 @@
 import { DataTableReducerState } from "common/reducers/DataTableReducer/types";
 import { genericKeyFactory } from "./genericKeyFactory";
 
-export const genericFilteredDataTableKeyFactory = <
-  SELECTED_FILTERS_TYPE,
-  SELECTED_AND_DATA_TABLE_FILTERS_TYPE extends DataTableReducerState,
->(
+export const genericFilteredDataTableKeyFactory = <SELECTED_FILTERS_TYPE>(
   domain: string,
 ) => ({
   ...genericKeyFactory(domain),
@@ -12,20 +9,21 @@ export const genericFilteredDataTableKeyFactory = <
     [
       { ...genericKeyFactory(domain).list(), name: "data-for-filters" },
     ] as const,
-  pageData: (filter: SELECTED_AND_DATA_TABLE_FILTERS_TYPE) =>
+  pageData: (tableData: DataTableReducerState, filter: SELECTED_FILTERS_TYPE) =>
     [
       {
         ...genericKeyFactory(domain).list(),
-        name: "table-data",
-        ...filter,
+        name: "page-data",
+        tableData,
+        filter,
       },
     ] as const,
-  count: (extendedFilter: SELECTED_FILTERS_TYPE) =>
+  dataCount: (filter: SELECTED_FILTERS_TYPE) =>
     [
       {
         ...genericKeyFactory(domain).list(),
-        name: "count",
-        ...extendedFilter,
+        name: "data-count",
+        filter,
       },
     ] as const,
 });

@@ -1,18 +1,18 @@
 import { BookUtils } from "common/utils/BookUtils";
-import { AuthorChangeAction, BooksFilterReducerState } from "../types";
+import { AuthorChangeAction, BookFilterReducerState } from "../types";
 
 export const authorChange = (
-  state: BooksFilterReducerState,
+  state: BookFilterReducerState,
   action: AuthorChangeAction,
-): BooksFilterReducerState => {
+): BookFilterReducerState => {
   if (
-    !state.filterData?.bookDataForFilters ||
+    !state.filterData?.dataForFilters ||
     !state.selectedFilters?.dropdownFilters
   )
     return { ...state };
 
   const newSelectedBookFilterDataByAuthor =
-    state.filterData.bookDataForFilters.filter((book) =>
+    state.filterData.dataForFilters.filter((book) =>
       action.payload.some((value) => value === book.author_id),
     );
 
@@ -26,7 +26,7 @@ export const authorChange = (
     ...state,
     filterData: {
       ...state.filterData,
-      selectedBookFilterData: newSelectedBookFilterDataByAuthor,
+      selectedFilterData: newSelectedBookFilterDataByAuthor,
       allCategories: categories,
     },
     selectedFilters: {

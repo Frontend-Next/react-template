@@ -1,27 +1,29 @@
 import {
-  DEFAULT_DATA_TABLE_REDUCER_STATE,
   DataTableActionType,
+  DataTableReducerActions,
   DataTableReducerState,
 } from "../DataTableReducer/types";
 
 export interface FilteredDataTableReducerState<
-  SELECTED_FILTERS_TYPE = void,
-  FILTERS_DATA_TYPE = void,
-> extends DataTableReducerState {
+  SELECTED_FILTERS_TYPE,
+  FILTERS_DATA_TYPE,
+> {
+  tableData: DataTableReducerState;
   selectedFilters?: SELECTED_FILTERS_TYPE;
   filterData?: FILTERS_DATA_TYPE;
   applyTimestamp?: number;
 }
 
-export const DEFAULT_FILTERED_DATA_TABLE_REDUCER_STATE: FilteredDataTableReducerState =
-  {
-    ...DEFAULT_DATA_TABLE_REDUCER_STATE,
-  };
-
-export type FilteredDataTableReducer = (
-  state: FilteredDataTableReducerState,
+export type FilteredDataTableReducer = <
+  SELECTED_FILTERS_TYPE,
+  FILTERS_DATA_TYPE,
+>(
+  state: FilteredDataTableReducerState<
+    SELECTED_FILTERS_TYPE,
+    FILTERS_DATA_TYPE
+  >,
   action: FilteredDataTableReducerActions,
-) => FilteredDataTableReducerState;
+) => FilteredDataTableReducerState<SELECTED_FILTERS_TYPE, FILTERS_DATA_TYPE>;
 
 enum FilteredDataTableActionsEnum {
   SetFiltersData = "SET_FILTERS_DATA",
@@ -36,24 +38,25 @@ export const FilteredDataTableActionType = {
 };
 export type FilteredDataTableActionType = typeof FilteredDataTableActionType;
 
-type SetFiltersDataAction = {
+export type SetFiltersDataAction = {
   type: FilteredDataTableActionType["SetFiltersData"];
   payload: any[];
 };
 
-type SelectAllAction = {
+export type SelectAllAction = {
   type: FilteredDataTableActionType["SelectAll"];
 };
 
-type ClearAction = {
+export type ClearAction = {
   type: FilteredDataTableActionType["Clear"];
 };
 
-type ApplyAction = {
+export type ApplyAction = {
   type: FilteredDataTableActionType["Apply"];
 };
 
 export type FilteredDataTableReducerActions =
+  | DataTableReducerActions
   | SetFiltersDataAction
   | SelectAllAction
   | ClearAction

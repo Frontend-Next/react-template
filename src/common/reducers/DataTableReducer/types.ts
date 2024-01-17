@@ -4,17 +4,13 @@ import {
 } from "common/constants/TableDefaults";
 
 export interface DataTableReducerState {
-  tableData: {
-    page: number;
-    pageSize: number;
-  };
+  page: number;
+  pageSize: number;
 }
 
 export const DEFAULT_DATA_TABLE_REDUCER_STATE: DataTableReducerState = {
-  tableData: {
-    page: DEFAULT_PAGE,
-    pageSize: DEFAULT_PAGE_SIZE,
-  },
+  page: DEFAULT_PAGE,
+  pageSize: DEFAULT_PAGE_SIZE,
 };
 
 export type DataTableReducer = (

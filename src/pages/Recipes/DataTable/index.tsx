@@ -1,17 +1,24 @@
-import { DataTableActionType } from "common/reducers/DataTableReducer/types";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { FC } from "react";
-import { useBooksTableView } from "./hook";
+import { RecipeFilterActionType } from "../FilterReducer/types";
+import { useRecipesTableView } from "./hook";
 
-export const BooksTable: FC = () => {
-  const { data, count, page, pageSize, dispatch } = useBooksTableView();
+export const RecipesTable: FC = () => {
+  const {
+    pageData,
+    dataCount,
+    filterState: {
+      tableData: { page, pageSize },
+    },
+    dispatch,
+  } = useRecipesTableView();
 
   return (
     <DataTable
       itemID="id"
-      value={data}
-      totalRecords={count}
+      value={pageData}
+      totalRecords={dataCount}
       paginator
       first={page}
       rows={pageSize}
@@ -20,16 +27,17 @@ export const BooksTable: FC = () => {
       lazy
       onPage={(event) =>
         dispatch({
-          type: DataTableActionType.PageChange,
+          type: RecipeFilterActionType.PageChange,
           payload: { page: event.first, pageSize: event.rows },
         })
       }
     >
-      <Column field="title" header="Title" />
-      <Column field="author" header="Author" />
+      <Column field="name" header="Title" />
       <Column field="category" header="Category" />
+      <Column field="author" header="Author" />
       <Column field="publication_date" header="Pub. Date" />
       <Column field="rating" header="Rating" />
+      <Column field="ingredients" header="Ingredients" />
     </DataTable>
   );
 };

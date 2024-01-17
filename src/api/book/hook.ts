@@ -1,47 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
-import { BooksExtendedFilterState, BooksFilterState } from ".";
+import { BookFilterState } from "api/book";
+import { DataTableReducerState } from "common/reducers/DataTableReducer/types";
 import { BookQuery } from "./query";
 
 export const useBookDataForFilters = () => {
-  return useQuery(BookQuery.bookDataForFiltersQuery());
+  return useQuery(BookQuery.dataForFiltersQuery());
 };
 
-// export const useSuspenseBookDataForFilters = () => {
-//   return useSuspenseQuery(BookQuery.bookDataForFiltersQuery());
-// };
-
-export const useBookTableData = (
+export const useBookPageData = (
   isEnabled: boolean,
-  filter: BooksFilterState,
+  dataTable: DataTableReducerState,
+  filter: BookFilterState,
 ) => {
-  return useQuery(BookQuery.bookTableDataQuery(isEnabled, filter));
+  return useQuery(BookQuery.pageDataQuery(isEnabled, dataTable, filter));
 };
 
-// export const useSuspenseBookTableData = (
-//   isEnabled: boolean,
-//   filter: BooksFilterState,
-// ) => {
-//   return useSuspenseQuery(BookQuery.bookTableDataQuery(isEnabled, filter));
-// };
-
-export const useBookCount = (
+export const useBookDataCount = (
   isEnabled: boolean,
-  extendedFilter: BooksExtendedFilterState,
+  extendedFilter: BookFilterState,
 ) => {
-  return useQuery(BookQuery.bookCountQuery(isEnabled, extendedFilter));
+  return useQuery(BookQuery.dataCountQuery(isEnabled, extendedFilter));
 };
-
-// export const useSuspenseBookCount = (
-//   isEnabled: boolean,
-//   extendedFilter: BooksExtendedFilterState,
-// ) => {
-//   return useSuspenseQuery(BookQuery.bookCountQuery(isEnabled, extendedFilter));
-// };
-
-export const useBookById = (id: number) => {
-  return useQuery(BookQuery.bookByIdQuery(id));
-};
-
-// export const useSuspenseBookById = (id: number) => {
-//   return useSuspenseQuery(BookQuery.bookByIdQuery(id));
-// };

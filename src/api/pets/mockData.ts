@@ -7,10 +7,7 @@ const fetchPageData = async ({
 }: QueryFunctionContext): Promise<Pet[]> => {
   const { filter } = (<ReturnType<typeof PetKeyFactory.pageData>>queryKey)[0];
   return Promise.resolve(
-    mockedPets.slice(
-      filter.tableData.page,
-      filter.tableData.page + filter.tableData.pageSize,
-    ),
+    mockedPets.slice(filter.page, filter.page + filter.pageSize),
   );
 };
 

@@ -1,23 +1,23 @@
+import { useBookFilterReducer } from "pages/Books/FilterReducer/hook";
 import { Dispatch, FC, PropsWithChildren, createContext, useMemo } from "react";
 import {
-  BooksFilterActions,
-  BooksFilterReducerState,
+  BookFilterActions,
+  BookFilterReducerState,
 } from "../FilterReducer/types";
-import { useBooksFilterReducer } from "../FilterReducer/useBooksFilterReducer";
 
-export interface BooksListContextType {
-  filterState: BooksFilterReducerState;
-  dispatch: Dispatch<BooksFilterActions>;
+export interface BookListContextType {
+  filterState: BookFilterReducerState;
+  dispatch: Dispatch<BookFilterActions>;
 }
 
-export const BooksListContext = createContext<BooksListContextType | undefined>(
+export const BookListContext = createContext<BookListContextType | undefined>(
   undefined,
 );
 
-export const BooksListContextProvider: FC<PropsWithChildren> = ({
+export const BookListContextProvider: FC<PropsWithChildren> = ({
   children,
 }) => {
-  const { state, dispatch } = useBooksFilterReducer();
+  const { state, dispatch } = useBookFilterReducer();
 
   const value = useMemo(
     () => ({
@@ -28,8 +28,8 @@ export const BooksListContextProvider: FC<PropsWithChildren> = ({
   );
 
   return (
-    <BooksListContext.Provider value={value}>
+    <BookListContext.Provider value={value}>
       {children}
-    </BooksListContext.Provider>
+    </BookListContext.Provider>
   );
 };

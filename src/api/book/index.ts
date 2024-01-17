@@ -1,5 +1,4 @@
 import { PublicationGroup } from "common/constants/PublicationGroup";
-import { DataTableFilterState } from "common/types/DataTableFilterState";
 
 export interface Book {
   id: number;
@@ -12,9 +11,7 @@ export interface Book {
   rating: number;
 }
 
-export type BooksFilterState = DataTableFilterState<BooksExtendedFilterState>;
-
-export interface BooksExtendedFilterState {
+export interface BookFilterState {
   dropdownFilters?: {
     selectedAuthors: number[];
     selectedCategories: number[];

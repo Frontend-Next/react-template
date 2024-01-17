@@ -11,6 +11,6 @@ export const dataTableReducer: DataTableReducer = (
 ): DataTableReducerState => {
   switch (action.type) {
     case DataTableActionType.PageChange:
-      return { ...state, tableData: { ...state.tableData, ...action.payload } };
+      return { ...state, ...action.payload };
   }
 };

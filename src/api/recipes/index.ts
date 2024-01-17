@@ -10,7 +10,7 @@ export interface Recipe {
   ingredients: string[];
 }
 
-// for selected filters
+// for selected filters and count query
 export interface RecipeFilterState {
   dropdownFilters?: {
     selectedAuthors: number[];
