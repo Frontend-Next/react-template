@@ -2,10 +2,11 @@ import { Book, BookFilterState } from "api/book";
 import { PublicationGroup } from "common/constants/PublicationGroup";
 import { DEFAULT_DATA_TABLE_REDUCER_STATE } from "common/reducers/DataTableReducer/types";
 import {
-  FilteredDataTableActionType,
+  FilteredDataTableActionTypes,
   FilteredDataTableReducerActions,
   FilteredDataTableReducerState,
 } from "common/reducers/FilteredDataTableReducer/types";
+import { FilterRow } from "common/types/FilterRow";
 
 export interface BookFilterDataReducerState {
   dataForFilters: Book[];
@@ -36,11 +37,11 @@ enum BookFilterActionsEnum {
   PublicationGroupChange = "PUBLICATION_GROUP_CHANGE",
 }
 
-export const BookFilterActionType = {
-  ...FilteredDataTableActionType,
+export const BookFilterActionTypes = {
+  ...FilteredDataTableActionTypes,
   ...BookFilterActionsEnum,
 };
-export type BookFilterActionType = typeof BookFilterActionType;
+type BookFilterActionType = typeof BookFilterActionTypes;
 
 export type AuthorChangeAction = {
   type: BookFilterActionType["AuthorChange"];

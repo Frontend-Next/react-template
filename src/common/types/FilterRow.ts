@@ -1,4 +1,4 @@
-interface FilterRow {
+export interface FilterRow {
   id: number;
   value: string;
 }

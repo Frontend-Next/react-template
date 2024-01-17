@@ -1,6 +1,13 @@
 import { MultiStateButton } from "common/components/MultiStateButton";
 import { FC } from "react";
 
+enum ProductColor {
+  RED = "RED",
+  BLUE = "BLUE",
+  WHITE = "WHITE",
+  YELLOW = "YELLOW",
+}
+
 export const Demo: FC = () => {
   return (
     <>
@@ -21,10 +28,3 @@ export const Demo: FC = () => {
     </>
   );
 };
-
-enum ProductColor {
-  RED = "RED",
-  BLUE = "BLUE",
-  WHITE = "WHITE",
-  YELLOW = "YELLOW",
-}

@@ -1,5 +1,5 @@
+import { genericKeyFactory } from "common/api/genericKeyFactory";
 import { DataTableReducerState } from "common/reducers/DataTableReducer/types";
-import { genericKeyFactory } from "./genericKeyFactory";
 
 export const genericFilteredDataTableKeyFactory = <SELECTED_FILTERS_TYPE>(
   domain: string,

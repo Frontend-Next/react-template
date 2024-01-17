@@ -1,8 +1,8 @@
 import { UseQueryOptions } from "@tanstack/react-query";
+import { Recipe, RecipeFilterState } from "api/recipes";
+import { RecipeClient } from "api/recipes/client";
+import { RecipeKeyFactory } from "api/recipes/keyFactory";
 import { DataTableReducerState } from "common/reducers/DataTableReducer/types";
-import { Recipe, RecipeFilterState } from ".";
-import { RecipeClient } from "./client";
-import { RecipeKeyFactory } from "./keyFactory";
 
 const dataForFiltersQuery = (): UseQueryOptions<Recipe[]> => ({
   queryKey: RecipeKeyFactory.dataForFilters(),

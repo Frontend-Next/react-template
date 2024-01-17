@@ -1,4 +1,4 @@
-import { Book } from ".";
+import { Book } from "api/book";
 
 export const mockedBooks: Book[] = [
   {

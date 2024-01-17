@@ -1,8 +1,8 @@
 import { DataTableActionType } from "common/reducers/DataTableReducer/types";
+import { usePetsTableView } from "pages/Pets/PetsTable/hook";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { FC } from "react";
-import { usePetsTableView } from "./hook";
 
 export const PetsTable: FC = () => {
   const { page, pageSize, pageData, dataCount, dispatch } = usePetsTableView();

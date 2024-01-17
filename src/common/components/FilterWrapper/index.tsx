@@ -1,6 +1,6 @@
+import { FilterWrapperButtons } from "common/components/FilterWrapper/buttons";
 import { Toolbar } from "primereact/toolbar";
 import { FC, PropsWithChildren } from "react";
-import { FilterWrapperButtons } from "./buttons";
 
 interface FilterWrapperProps {
   applyHandler: () => void;
@@ -17,22 +17,20 @@ export const FilterWrapper: FC<PropsWithChildren<FilterWrapperProps>> = ({
   );
 
   return (
-    <>
-      <Toolbar
-        className="align-items-start"
-        pt={{
-          start: {
-            className: "w-10",
-          },
-        }}
-        start={filterElements}
-        end={
-          <FilterWrapperButtons
-            applyHandler={applyHandler}
-            selectAllHandler={selectAllHandler}
-          />
-        }
-      />
-    </>
+    <Toolbar
+      className="align-items-start"
+      pt={{
+        start: {
+          className: "w-10",
+        },
+      }}
+      start={filterElements}
+      end={
+        <FilterWrapperButtons
+          applyHandler={applyHandler}
+          selectAllHandler={selectAllHandler}
+        />
+      }
+    />
   );
 };

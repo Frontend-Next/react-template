@@ -3,7 +3,7 @@ import {
   DataTableReducer,
   DataTableReducerActions,
   DataTableReducerState,
-} from "./types";
+} from "common/reducers/DataTableReducer/types";
 
 export const dataTableReducer: DataTableReducer = (
   state: DataTableReducerState,
@@ -12,5 +12,7 @@ export const dataTableReducer: DataTableReducer = (
   switch (action.type) {
     case DataTableActionType.PageChange:
       return { ...state, ...action.payload };
+    default:
+      return state;
   }
 };

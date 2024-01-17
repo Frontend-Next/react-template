@@ -1,18 +1,18 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
+import { Recipe } from "api/recipes";
+import { RecipeKeyFactory } from "api/recipes/keyFactory";
+import { mockedRecipes } from "api/recipes/mockData";
 import { Config } from "common/constants/Config";
 import { axiosInstance } from "common/services/AxiosConfig";
-import { Recipe } from ".";
-import { RecipeKeyFactory } from "./keyFactory";
-import { mockedRecipes } from "./mockData";
 
 const provideDataForFilters = async (): Promise<Recipe[]> => {
   if (Config.USE_MOCKED_DATA) {
     return mockedRecipes;
-  } else {
-    return axiosInstance
-      .get<Recipe[]>("recipes/filter")
-      .then((response) => response.data);
   }
+
+  return axiosInstance
+    .get<Recipe[]>("recipes/filter")
+    .then((response) => response.data);
 };
 
 const providePageData = async ({
@@ -24,16 +24,15 @@ const providePageData = async ({
 
   if (Config.USE_MOCKED_DATA) {
     return mockedRecipes;
-  } else {
-    const urlParams = new URLSearchParams({
-      page: tableData.page.toString(),
-      pageSize: tableData.pageSize.toString(),
-    });
-
-    return axiosInstance
-      .post<Recipe[]>(`recipes?${urlParams}`, filter)
-      .then((response) => response.data);
   }
+  const urlParams = new URLSearchParams({
+    page: tableData.page.toString(),
+    pageSize: tableData.pageSize.toString(),
+  });
+
+  return axiosInstance
+    .post<Recipe[]>(`recipes?${urlParams}`, filter)
+    .then((response) => response.data);
 };
 
 const provideDataCount = async ({
@@ -45,11 +44,10 @@ const provideDataCount = async ({
 
   if (Config.USE_MOCKED_DATA) {
     return mockedRecipes.length;
-  } else {
-    return axiosInstance
-      .post<number>("recipes/count", filter)
-      .then((response) => response.data);
   }
+  return axiosInstance
+    .post<number>("recipes/count", filter)
+    .then((response) => response.data);
 };
 
 export const RecipeClient = {

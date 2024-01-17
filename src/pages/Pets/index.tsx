@@ -1,5 +1,5 @@
+import { PetsTable } from "pages/Pets/PetsTable";
 import { FC } from "react";
-import { PetsTable } from "./PetsTable";
 
 export const PetsList: FC = () => {
   return (

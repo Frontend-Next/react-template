@@ -1,9 +1,9 @@
 import { useBookFilterReducer } from "pages/Books/FilterReducer/hook";
-import { Dispatch, FC, PropsWithChildren, createContext, useMemo } from "react";
 import {
   BookFilterActions,
   BookFilterReducerState,
-} from "../FilterReducer/types";
+} from "pages/Books/FilterReducer/types";
+import { Dispatch, FC, PropsWithChildren, createContext, useMemo } from "react";
 
 export interface BookListContextType {
   filterState: BookFilterReducerState;

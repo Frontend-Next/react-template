@@ -1,9 +1,9 @@
 import { FilterMultiSelect } from "common/components/FilterMultiSelect";
 import { FilterWrapper } from "common/components/FilterWrapper";
 import { FilterWrapperRow } from "common/components/FilterWrapper/row";
+import { useRecipeListContext } from "pages/Recipes/Context/hook";
+import { RecipeFilterActionTypes } from "pages/Recipes/FilterReducer/types";
 import { FC } from "react";
-import { useRecipeListContext } from "../Context/hook";
-import { RecipeFilterActionType } from "../FilterReducer/types";
 
 export const RecipeFilterWrapper: FC = () => {
   const {
@@ -27,7 +27,7 @@ export const RecipeFilterWrapper: FC = () => {
           options={filterData?.allAuthors}
           onChangeHandler={(value) =>
             dispatch({
-              type: RecipeFilterActionType.AuthorChange,
+              type: RecipeFilterActionTypes.AuthorChange,
               payload: value,
             })
           }

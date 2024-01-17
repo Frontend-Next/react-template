@@ -1,8 +1,8 @@
+import { useRecipesTableView } from "pages/Recipes/DataTable/hook";
+import { RecipeFilterActionTypes } from "pages/Recipes/FilterReducer/types";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 import { FC } from "react";
-import { RecipeFilterActionType } from "../FilterReducer/types";
-import { useRecipesTableView } from "./hook";
 
 export const RecipesTable: FC = () => {
   const {
@@ -27,7 +27,7 @@ export const RecipesTable: FC = () => {
       lazy
       onPage={(event) =>
         dispatch({
-          type: RecipeFilterActionType.PageChange,
+          type: RecipeFilterActionTypes.PageChange,
           payload: { page: event.first, pageSize: event.rows },
         })
       }

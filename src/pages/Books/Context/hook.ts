@@ -1,5 +1,5 @@
+import { BookListContext, BookListContextType } from "pages/Books/Context";
 import { useContext } from "react";
-import { BookListContext, BookListContextType } from ".";
 
 export const useBooksListContext = (): BookListContextType => {
   const context = useContext(BookListContext);

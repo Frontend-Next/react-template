@@ -1,15 +1,18 @@
 import { filteredDataTableReducer } from "common/reducers/FilteredDataTableReducer/reducer";
-import { RecipeFilterActionType, RecipeFilterReducer } from "./types";
+import {
+  RecipeFilterActionTypes,
+  RecipeFilterReducer,
+} from "pages/Recipes/FilterReducer/types";
 
 export const recipeFilterReducer: RecipeFilterReducer = (state, action) => {
   switch (action.type) {
-    case RecipeFilterActionType.AuthorChange:
+    case RecipeFilterActionTypes.AuthorChange:
       return state;
 
-    case RecipeFilterActionType.CategoryChange:
+    case RecipeFilterActionTypes.CategoryChange:
       return state;
 
-    case RecipeFilterActionType.IngredientsChange:
+    case RecipeFilterActionTypes.IngredientsChange:
       return state;
 
     default:

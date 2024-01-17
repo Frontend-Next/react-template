@@ -1,8 +1,8 @@
 import { UseQueryOptions } from "@tanstack/react-query";
 import { Book, BookFilterState } from "api/book";
+import { BookClient } from "api/book/client";
+import { BookKeyFactory } from "api/book/keyFactory";
 import { DataTableReducerState } from "common/reducers/DataTableReducer/types";
-import { BookClient } from "./client";
-import { BookKeyFactory } from "./keyFactory";
 
 const dataForFiltersQuery = (): UseQueryOptions<Book[]> => ({
   queryKey: BookKeyFactory.dataForFilters(),

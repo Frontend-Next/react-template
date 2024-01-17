@@ -1,11 +1,11 @@
 import { FilterMultiSelect } from "common/components/FilterMultiSelect";
 import { FilterWrapper } from "common/components/FilterWrapper";
 import { FilterWrapperRow } from "common/components/FilterWrapper/row";
+import { LatestBooksFilterButton } from "common/components/LatestBooksFilterButton";
+import { useBooksListContext } from "pages/Books/Context/hook";
+import { BookFilterActionTypes } from "pages/Books/FilterReducer/types";
 import { Skeleton } from "primereact/skeleton";
 import { FC } from "react";
-import { LatestBooksFilterButton } from "../../../common/components/LatestBooksFilterButton";
-import { useBooksListContext } from "../Context/hook";
-import { BookFilterActionType } from "../FilterReducer/types";
 
 export const BooksFilterWrapper: FC = () => {
   const {
@@ -15,13 +15,13 @@ export const BooksFilterWrapper: FC = () => {
 
   const applyHandler = () => {
     dispatch({
-      type: BookFilterActionType.Apply,
+      type: BookFilterActionTypes.Apply,
     });
   };
 
   const selectAllHandler = () => {
     dispatch({
-      type: BookFilterActionType.SelectAll,
+      type: BookFilterActionTypes.SelectAll,
     });
   };
 
@@ -37,7 +37,7 @@ export const BooksFilterWrapper: FC = () => {
           options={filterData?.allAuthors}
           onChangeHandler={(value) =>
             dispatch({
-              type: BookFilterActionType.AuthorChange,
+              type: BookFilterActionTypes.AuthorChange,
               payload: value,
             })
           }
@@ -49,7 +49,7 @@ export const BooksFilterWrapper: FC = () => {
           options={filterData?.allCategories}
           onChangeHandler={(value) =>
             dispatch({
-              type: BookFilterActionType.CategoryChange,
+              type: BookFilterActionTypes.CategoryChange,
               payload: value,
             })
           }
@@ -64,7 +64,7 @@ export const BooksFilterWrapper: FC = () => {
             currentValue={selectedFilters?.switchFilters.publicationGroup}
             onValueChangeHandler={(newValue) =>
               dispatch({
-                type: BookFilterActionType.PublicationGroupChange,
+                type: BookFilterActionTypes.PublicationGroupChange,
                 payload: newValue,
               })
             }

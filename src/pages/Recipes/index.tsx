@@ -1,6 +1,6 @@
+import { RecipeListContextProvider } from "pages/Recipes/Context";
+import { RecipeFilterWrapper } from "pages/Recipes/FilterWrapper";
 import { FC } from "react";
-import { RecipeListContextProvider } from "./Context";
-import { RecipeFilterWrapper } from "./FilterWrapper";
 
 export const RecipesList: FC = () => {
   return (

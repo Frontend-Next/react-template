@@ -1,5 +1,9 @@
+import { FilterRow } from "common/types/FilterRow";
 import { BookUtils } from "common/utils/BookUtils";
-import { BookFilterReducerState, CategoryChangeAction } from "../types";
+import {
+  BookFilterReducerState,
+  CategoryChangeAction,
+} from "pages/Books/FilterReducer/types";
 
 export const categoryChange = (
   state: BookFilterReducerState,

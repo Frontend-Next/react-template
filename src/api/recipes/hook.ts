@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
+import { RecipeFilterState } from "api/recipes";
+import { RecipeQuery } from "api/recipes/query";
 import { DataTableReducerState } from "common/reducers/DataTableReducer/types";
-import { RecipeFilterState } from ".";
-import { RecipeQuery } from "./query";
 
 export const useRecipeDataForFilters = () =>
   useQuery(RecipeQuery.dataForFiltersQuery());

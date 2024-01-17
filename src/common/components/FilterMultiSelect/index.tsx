@@ -1,6 +1,7 @@
+import { FilterMultiSelectSkeleton } from "common/components/FilterMultiSelect/skeleton";
+import { FilterRow } from "common/types/FilterRow";
 import { MultiSelect } from "primereact/multiselect";
 import { FC } from "react";
-import { FilterMultiSelectSkeleton } from "./skeleton";
 
 interface FilterMultiSelectProps {
   placeholder: string;

@@ -1,5 +1,5 @@
 import { SplitButton } from "primereact/splitbutton";
-import { FC, useMemo, useState } from "react";
+import { FC, useCallback, useMemo, useState } from "react";
 
 interface MultiStateButtonProps {
   states: MultiStateButtonStatesElement[];
@@ -28,19 +28,22 @@ export const MultiStateButton: FC<MultiStateButtonProps> = ({
     return index;
   }, [states, activeState]);
 
+  const setActiveStateHandler = useCallback(
+    (newActiveState: typeof activeState): void => {
+      setActiveState(newActiveState);
+      if (onValueChangeHandler) onValueChangeHandler(newActiveState);
+    },
+    [setActiveState, onValueChangeHandler],
+  );
+
   const items = useMemo(
     () =>
       states.map((state) => ({
         label: state.label,
         command: () => setActiveStateHandler(state.value),
       })),
-    [states],
+    [states, setActiveStateHandler],
   );
-
-  const setActiveStateHandler = (newActiveState: typeof activeState): void => {
-    setActiveState(newActiveState);
-    if (onValueChangeHandler) onValueChangeHandler(newActiveState);
-  };
 
   const setNextActiveState = (): void => {
     setActiveState((prevState) => {
@@ -61,4 +64,9 @@ export const MultiStateButton: FC<MultiStateButtonProps> = ({
       model={items}
     />
   );
+};
+
+MultiStateButton.defaultProps = {
+  value: undefined,
+  onValueChangeHandler: undefined,
 };

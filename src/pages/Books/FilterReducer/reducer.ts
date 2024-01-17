@@ -1,22 +1,22 @@
 import { filteredDataTableReducer } from "common/reducers/FilteredDataTableReducer/reducer";
 import { BookFilterReducerActions } from "pages/Books/FilterReducer/actions";
 import {
-  BookFilterActionType,
+  BookFilterActionTypes,
   BookFilterReducer,
 } from "pages/Books/FilterReducer/types";
 
 export const bookFilterReducer: BookFilterReducer = (state, action) => {
   switch (action.type) {
-    case BookFilterActionType.SetFiltersData:
+    case BookFilterActionTypes.SetFiltersData:
       return BookFilterReducerActions.setFiltersData(action);
 
-    case BookFilterActionType.AuthorChange:
+    case BookFilterActionTypes.AuthorChange:
       return BookFilterReducerActions.authorChange(state, action);
 
-    case BookFilterActionType.CategoryChange:
+    case BookFilterActionTypes.CategoryChange:
       return BookFilterReducerActions.categoryChange(state, action);
 
-    case BookFilterActionType.PublicationGroupChange:
+    case BookFilterActionTypes.PublicationGroupChange:
       if (!state.selectedFilters?.switchFilters) return { ...state };
 
       return {
@@ -32,7 +32,7 @@ export const bookFilterReducer: BookFilterReducer = (state, action) => {
         applyTimestamp: Date.now(),
       };
 
-    case BookFilterActionType.Apply:
+    case BookFilterActionTypes.Apply:
       return {
         ...state,
         tableData: { ...state.tableData, page: 0 },

@@ -1,9 +1,9 @@
-import { Dispatch, FC, PropsWithChildren, createContext, useMemo } from "react";
-import { useRecipeFilterReducer } from "../FilterReducer/hook";
+import { useRecipeFilterReducer } from "pages/Recipes/FilterReducer/hook";
 import {
   RecipeFilterActions,
   RecipeFilterReducerState,
-} from "../FilterReducer/types";
+} from "pages/Recipes/FilterReducer/types";
+import { Dispatch, FC, PropsWithChildren, createContext, useMemo } from "react";
 
 export interface RecipeListContextType {
   filterState: RecipeFilterReducerState;

@@ -1,10 +1,11 @@
 import { Recipe, RecipeFilterState } from "api/recipes";
 import { DEFAULT_DATA_TABLE_REDUCER_STATE } from "common/reducers/DataTableReducer/types";
 import {
-  FilteredDataTableActionType,
+  FilteredDataTableActionTypes,
   FilteredDataTableReducerActions,
   FilteredDataTableReducerState,
 } from "common/reducers/FilteredDataTableReducer/types";
+import { FilterRow } from "common/types/FilterRow";
 
 export interface RecipeFilterDataReducerState {
   dataForFilters: Recipe[];
@@ -36,11 +37,11 @@ enum RecipeFilterActionsEnum {
   IngredientsChange = "INGREDIENTS_CHANGE",
 }
 
-export const RecipeFilterActionType = {
-  ...FilteredDataTableActionType,
+export const RecipeFilterActionTypes = {
+  ...FilteredDataTableActionTypes,
   ...RecipeFilterActionsEnum,
 };
-export type RecipeFilterActionType = typeof RecipeFilterActionType;
+type RecipeFilterActionType = typeof RecipeFilterActionTypes;
 
 type AuthorChangeAction = {
   type: RecipeFilterActionType["AuthorChange"];

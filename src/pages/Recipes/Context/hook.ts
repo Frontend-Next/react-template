@@ -1,5 +1,8 @@
+import {
+  RecipeListContext,
+  RecipeListContextType,
+} from "pages/Recipes/Context";
 import { useContext } from "react";
-import { RecipeListContext, RecipeListContextType } from ".";
 
 export const useRecipeListContext = (): RecipeListContextType => {
   const context = useContext(RecipeListContext);

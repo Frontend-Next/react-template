@@ -1,4 +1,5 @@
 import { Book } from "api/book";
+import { FilterRow } from "common/types/FilterRow";
 
 const uniqueFilterRowFromBookArrayByKey = (
   array: Book[],

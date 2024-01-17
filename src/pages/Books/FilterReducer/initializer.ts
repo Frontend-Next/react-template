@@ -4,8 +4,9 @@ import {
   DEFAULT_PAGE,
   DEFAULT_PAGE_SIZE,
 } from "common/constants/TableDefaults";
+import { FilterRow } from "common/types/FilterRow";
 import { BookUtils } from "common/utils/BookUtils";
-import { BookFilterReducerState } from "./types";
+import { BookFilterReducerState } from "pages/Books/FilterReducer/types";
 
 export const booksReducerInitializerFunction = (
   books: Book[],

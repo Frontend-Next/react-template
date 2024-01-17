@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { QueryFunctionContext } from "@tanstack/react-query";
-import { Pet } from ".";
-import { PetKeyFactory } from "./keyFactory";
+import { Pet } from "api/pets";
+import { PetKeyFactory } from "api/pets/keyFactory";
 
 const fetchPageData = async ({
   queryKey,

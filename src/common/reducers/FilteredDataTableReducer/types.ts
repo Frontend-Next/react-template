@@ -2,7 +2,7 @@ import {
   DataTableActionType,
   DataTableReducerActions,
   DataTableReducerState,
-} from "../DataTableReducer/types";
+} from "common/reducers/DataTableReducer/types";
 
 export interface FilteredDataTableReducerState<
   SELECTED_FILTERS_TYPE,
@@ -32,15 +32,15 @@ enum FilteredDataTableActionsEnum {
   Apply = "APPLY",
 }
 
-export const FilteredDataTableActionType = {
+export const FilteredDataTableActionTypes = {
   ...DataTableActionType,
   ...FilteredDataTableActionsEnum,
 };
-export type FilteredDataTableActionType = typeof FilteredDataTableActionType;
+type FilteredDataTableActionType = typeof FilteredDataTableActionTypes;
 
 export type SetFiltersDataAction = {
   type: FilteredDataTableActionType["SetFiltersData"];
-  payload: any[];
+  payload: object[];
 };
 
 export type SelectAllAction = {

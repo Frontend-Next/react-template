@@ -1,10 +1,10 @@
 import { dataTableReducer } from "common/reducers/DataTableReducer/reducer";
 import {
-  FilteredDataTableActionType,
+  FilteredDataTableActionTypes,
   FilteredDataTableReducer,
   FilteredDataTableReducerActions,
   FilteredDataTableReducerState,
-} from "./types";
+} from "common/reducers/FilteredDataTableReducer/types";
 
 export const filteredDataTableReducer: FilteredDataTableReducer = <
   SELECTED_FILTERS_TYPE,
@@ -17,16 +17,16 @@ export const filteredDataTableReducer: FilteredDataTableReducer = <
   action: FilteredDataTableReducerActions,
 ): FilteredDataTableReducerState<SELECTED_FILTERS_TYPE, FILTERS_DATA_TYPE> => {
   switch (action.type) {
-    case FilteredDataTableActionType.SetFiltersData:
+    case FilteredDataTableActionTypes.SetFiltersData:
       return { ...state };
 
-    case FilteredDataTableActionType.SelectAll:
+    case FilteredDataTableActionTypes.SelectAll:
       return { ...state };
 
-    case FilteredDataTableActionType.Clear:
+    case FilteredDataTableActionTypes.Clear:
       return { ...state };
 
-    case FilteredDataTableActionType.Apply:
+    case FilteredDataTableActionTypes.Apply:
       return { ...state, applyTimestamp: Date.now() };
 
     default:

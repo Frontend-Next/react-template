@@ -10,10 +10,10 @@ export const TableSkeleton: FC = () => {
 
   return (
     <DataTable value={items} stripedRows showHeaders={false}>
-      <Column style={{ width: "25%" }} body={<Skeleton />}></Column>
-      <Column style={{ width: "25%" }} body={<Skeleton />}></Column>
-      <Column style={{ width: "25%" }} body={<Skeleton />}></Column>
-      <Column style={{ width: "25%" }} body={<Skeleton />}></Column>
+      <Column style={{ width: "25%" }} body={<Skeleton />} />
+      <Column style={{ width: "25%" }} body={<Skeleton />} />
+      <Column style={{ width: "25%" }} body={<Skeleton />} />
+      <Column style={{ width: "25%" }} body={<Skeleton />} />
     </DataTable>
   );
 };

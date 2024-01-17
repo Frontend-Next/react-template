@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { BookFilterState } from "api/book";
+import { BookQuery } from "api/book/query";
 import { DataTableReducerState } from "common/reducers/DataTableReducer/types";
-import { BookQuery } from "./query";
 
 export const useBookDataForFilters = () => {
   return useQuery(BookQuery.dataForFiltersQuery());

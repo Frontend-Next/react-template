@@ -24,5 +24,12 @@ module.exports = {
       2,
       { namedComponents: "arrow-function" },
     ],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        selector: "typeParameter",
+        format: ["UPPER_CASE"],
+      },
+    ],
   },
 };

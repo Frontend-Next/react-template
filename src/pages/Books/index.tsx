@@ -1,7 +1,7 @@
+import { BookListContextProvider } from "pages/Books/Context";
+import { BooksTable } from "pages/Books/DataTable";
+import { BooksFilterWrapper } from "pages/Books/FilterWrapper";
 import { FC } from "react";
-import { BookListContextProvider } from "./Context";
-import { BooksTable } from "./DataTable";
-import { BooksFilterWrapper } from "./FilterWrapper";
 
 export const BooksList: FC = () => {
   return (

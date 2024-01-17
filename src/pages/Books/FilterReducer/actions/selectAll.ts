@@ -1,5 +1,5 @@
-import { booksReducerInitializerFunction } from "../initializer";
-import { BookFilterReducerState } from "../types";
+import { booksReducerInitializerFunction } from "pages/Books/FilterReducer/initializer";
+import { BookFilterReducerState } from "pages/Books/FilterReducer/types";
 
 export const selectAll = (
   state: BookFilterReducerState,

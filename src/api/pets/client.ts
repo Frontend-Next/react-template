@@ -1,9 +1,9 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
+import { Pet } from "api/pets";
+import { PetKeyFactory } from "api/pets/keyFactory";
+import { PetMockedClient } from "api/pets/mockData";
 import { Config } from "common/constants/Config";
 import { axiosInstance } from "common/services/AxiosConfig";
-import { Pet } from ".";
-import { PetKeyFactory } from "./keyFactory";
-import { PetMockedClient } from "./mockData";
 
 const fetchPageData = async ({
   queryKey,

@@ -1,13 +1,11 @@
+import { authorChange } from "pages/Books/FilterReducer/actions/authorChange";
 import { categoryChange } from "pages/Books/FilterReducer/actions/categoryChange";
-import { authorChange } from "./authorChange";
-// import { pageChange } from "./pageChange";
-import { selectAll } from "./selectAll";
-import { setFiltersData } from "./setFiltersData";
+import { selectAll } from "pages/Books/FilterReducer/actions/selectAll";
+import { setFiltersData } from "pages/Books/FilterReducer/actions/setFiltersData";
 
 export const BookFilterReducerActions = {
   setFiltersData,
   selectAll,
-  // pageChange,
   authorChange,
   categoryChange,
 };

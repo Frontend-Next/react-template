@@ -1,8 +1,8 @@
 import { UseQueryOptions } from "@tanstack/react-query";
+import { Pet } from "api/pets";
+import { PetClient } from "api/pets/client";
+import { PetKeyFactory } from "api/pets/keyFactory";
 import { DataTableReducerState } from "common/reducers/DataTableReducer/types";
-import { Pet } from ".";
-import { PetClient } from "./client";
-import { PetKeyFactory } from "./keyFactory";
 
 const pageDataQuery = (
   filter: DataTableReducerState,
