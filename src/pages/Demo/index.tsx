@@ -21,9 +21,7 @@ export const Demo: FC = () => {
           { value: ProductColor.WHITE, label: "WHITE" },
           { value: ProductColor.YELLOW, label: "YELLOW" },
         ]}
-        onValueChangeHandler={(newValue) =>
-          console.log("onValueChange", newValue)
-        }
+        onValueChangeHandler={() => {}}
       />
     </>
   );
