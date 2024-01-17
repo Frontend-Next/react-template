@@ -1,4 +1,10 @@
-import { FC, PropsWithChildren, createContext, useContext } from "react";
+import {
+  FC,
+  PropsWithChildren,
+  createContext,
+  useContext,
+  useMemo,
+} from "react";
 
 interface SecurityContextType {}
 
@@ -9,8 +15,11 @@ const SecurityContext = createContext<SecurityContextType | undefined>(
 export const SecurityContextProvider: FC<PropsWithChildren> = ({
   children,
 }) => {
+  const value = useMemo(() => ({}), []);
   return (
-    <SecurityContext.Provider value={{}}>{children}</SecurityContext.Provider>
+    <SecurityContext.Provider value={value}>
+      {children}
+    </SecurityContext.Provider>
   );
 };
 
